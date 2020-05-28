@@ -1,0 +1,33 @@
+{
+  "name": "telegram",
+  "version": "1.0.0",
+  "description": "telegram web-app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "telegram",
+    "web-app"
+  ],
+  "author": "Yurii Dubnytskyi",
+  "license": "MIT",
+  "dependencies": {
+    "@types/react-redux": "^7.1.9",
+    "@types/socket.io": "^2.1.8",
+    "auth0-js": "^9.13.2",
+    "auth0-lock": "^11.24.0",
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "express-jwt-authz": "^2.3.1",
+    "jwks-rsa": "^1.8.0",
+    "mongoose": "^5.9.14",
+    "nodemon": "^2.0.4",
+    "react-redux": "^7.2.0",
+    "socket.io": "^2.3.0",
+    "ws": "^7.3.0"
+  }
+}
