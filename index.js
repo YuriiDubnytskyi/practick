@@ -29,12 +29,11 @@ app.use('/', express.static('./client/my-app/build'));
 io.on('connection', socket => {
   socket.on('new-user', (room, name) => {
     socket.join(room)
-    socket.to(room).broadcast.emit('user-connected', name)
+    socket.to(room).broadcast.emit('user-connected', {room,name})
+    console.log("here room"+room)
   })
-  socket.on('send-chat-message', (room, message) => {
-    console.log("here"+room)
-    console.log("here2"+message)
-    socket.to(room).broadcast.emit('chat-message', { message: message})
+  socket.on('send-chat-message', (room, message,email,name) => {
+    socket.to(room).broadcast.emit('chat-message', { message: message,email,name})
   })
  
 })

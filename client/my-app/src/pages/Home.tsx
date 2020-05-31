@@ -3,6 +3,7 @@ import {Route,Switch,Redirect} from 'react-router-dom';
 import About from "../containers/About";
 import Main from "../containers/Main";
 import AuthPage from './AuthPage';
+import Chat from '../containers/Chat'
 
 interface IHomeProps {
     auth:any
@@ -27,6 +28,12 @@ const Home:FC<IHomeProps> = (props:IHomeProps) => {
             }/>
             <Route path='/verified' exact render={props => auth.isAuthenticated() ? (
                     <AuthPage auth={auth}/>
+                ):(
+                    <Redirect to="/" />
+                )
+            }/>
+            <Route path='/chat' exact render={props => auth.isAuthenticated() ? (
+                    <Chat auth={auth}/>
                 ):(
                     <Redirect to="/" />
                 )
