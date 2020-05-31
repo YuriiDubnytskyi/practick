@@ -8,10 +8,14 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import user from "./store/reducers/user"
 import users from "./store/reducers/users"
+import messages from "./store/reducers/messages"
+import room from "./store/reducers/room"
 
 const rootReducer = combineReducers({
   user:user,
-  users:users
+  users:users,
+  messages:messages,
+  room:room
 });
 
 const logger = (store:any) => {

@@ -26,3 +26,30 @@ export const getAllUsers = (users:any) => {
         users:users
     };
 };
+
+export const addMess = (mess:any) => {
+    return {
+        type: actionTypes.ADD_MESS,
+        mess:mess
+    };
+};
+
+export const addRoom = (room:any) => {
+    return {
+        type: actionTypes.ADD_ROOM,
+        room:room
+    };
+};
+
+export const addInitMess = (mess:any) => {
+    return {
+        type: actionTypes.ADD_INIT_MESS,
+        mess:mess
+    };
+};
+
+export const removeMess = () => {
+    return {
+        type: actionTypes.REMOVE_MESS
+    }
+}

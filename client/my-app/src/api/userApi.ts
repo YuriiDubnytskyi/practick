@@ -15,3 +15,7 @@ export const deleteUserAcount = (id:any) => axios.delete("/api/users/deleteUser/
 export const getUsers = () => axios.get("/api/users/getAll").then((res)=>res.data)
 
 export const createOrSearchChat = (id1:any,id2:any) => axios.get("/api/rooms/getRoom/"+id1+"/"+id2).then((res)=>res.data)
+
+export const getChatUsers = (email:any) => axios.get("/api/rooms/getRoomsUsers/"+email,email).then((res)=>res.data)
+
+export const updateMess = (messData:any) => axios.put("/api/rooms/updateMess",messData).then((res)=>res.data)

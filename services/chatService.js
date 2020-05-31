@@ -26,4 +26,27 @@ const searchRoom = async (id1,id2) => {
     return await promise
 }
 
-module.exports = {searchRoom}
+const getRoomUsers = async (email) => {
+    let promise = new Promise((res,rej)=>{
+        const Room = chatSchema
+        Room.find({users:{$in:[email]}},function(err,rooms){
+            if(err) return console.log(err);
+            res(rooms)
+        })
+    }) 
+    return await promise
+}
+const updateMess = async (roomId,mess) => {
+    let promise = new Promise((res,rej)=>{
+        const Room = chatSchema
+        console.log("data"+roomId+"--"+mess)
+        Room.findOneAndUpdate({room:roomId},{messages:mess},{new:true , useFindAndModify: false},function(err,room){
+            if(err) return console.log(err);
+            console.log("room"+room)
+            res(room)
+        })
+    }) 
+    return await promise
+}
+
+module.exports = {searchRoom,getRoomUsers,updateMess}
