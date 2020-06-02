@@ -27,7 +27,7 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
     //         setUsers(arr.filter((el:any)=> el.email !== props.userInf.email))
     //     })
     // },[])
-    const [endpoint,setEndpoint] = useState('localhost:5000')
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com:${process.env.PORT}`)
     const socket = socketIOClient(endpoint);
     let history = useHistory();
     useEffect(()=>{

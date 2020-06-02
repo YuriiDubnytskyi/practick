@@ -9,7 +9,7 @@ interface IUsersProps {
 
 const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
     const [data,setData] = useState<any>([])
-    const [endpoint,setEndpoint] = useState('localhost:5000')
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com:${process.env.PORT}`)
     const socket = socketIOClient(endpoint);
 
     useEffect(()=>{
