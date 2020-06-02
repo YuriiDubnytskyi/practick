@@ -20,7 +20,7 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
         setMess(props.data.messages)
         
     },[])
-    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com:${process.env.PORT}`)
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com`)
     const socket = socketIOClient(endpoint);
 
     useEffect(()=>{

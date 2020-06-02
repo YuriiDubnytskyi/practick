@@ -8,7 +8,7 @@ export default class Auth {
     this.auth0 = new auth0.WebAuth({
       domain: "yurii-dubnytskyi.eu.auth0.com",
       clientID: "Vlvnr3poW9Ors21ydAosVRRpVncQlvqS",
-      redirectUri: `https://practick.herokuapp.com:${process.env.PORT}/callback`,
+      redirectUri: `https://practick.herokuapp.com/callback`,
       responseType: "token id_token",
       scope: this.requestedScopes
     });
@@ -66,7 +66,7 @@ export default class Auth {
     this.userProfile = null;
     this.auth0.logout({
       clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
-      returnTo: `https://practick.herokuapp.com:${process.env.PORT}/callback`
+      returnTo: `https://practick.herokuapp.com`
     });
   };
 
