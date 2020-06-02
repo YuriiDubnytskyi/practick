@@ -24,7 +24,9 @@ app.use(express.json());
 routes(app)
 app.use(express.static(path.join(__dirname, 'client/my-app/build')));
 //app.use('/', express.static('./client/my-app/build'));
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/my-app/build/index.html'));
+});
 
 io.on('connection', socket => {
   socket.on('new-user', (room, name) => {
