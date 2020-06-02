@@ -39,10 +39,8 @@ const getRoomUsers = async (email) => {
 const updateMess = async (roomId,mess) => {
     let promise = new Promise((res,rej)=>{
         const Room = chatSchema
-        console.log("data"+roomId+"--"+mess)
         Room.findOneAndUpdate({room:roomId},{messages:mess},{new:true , useFindAndModify: false},function(err,room){
             if(err) return console.log(err);
-            console.log("room"+room)
             res(room)
         })
     }) 
