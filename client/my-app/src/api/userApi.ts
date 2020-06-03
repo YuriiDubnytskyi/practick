@@ -18,4 +18,6 @@ export const createOrSearchChat = (id1:any,id2:any) => axios.get("/api/rooms/get
 
 export const getChatUsers = (email:any) => axios.get("/api/rooms/getRoomsUsers/"+email,email).then((res)=>res.data)
 
+export const getChatMessages = (room:any) => axios.get("/api/rooms/getRoomsMessages/"+room,room).then((res)=>res.data[0].messages)
+
 export const updateMess = (messData:any) => axios.put("/api/rooms/updateMess",messData).then((res)=>res.data)

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {searchRoom,getRoomUsers,updateMess} = require('../services/chatService.js');
+const {searchRoom,getRoomUsers,updateMess,getRoomMessages} = require('../services/chatService.js');
 //validation
 const router = Router();
 
@@ -17,10 +17,22 @@ router.get('/getRoom/:id1/:id2', (req, res) => {
     })
 })
 
-router.get('/getRoomsUsers/:email', (req, res) => {
+router.get('/getRoomsUsers/:room', (req, res) => {
+    console.log(req.params)
+    const room = req.params.room
+    const result =  getRoomUsers(room).then((r)=>{
+        if (r) {
+            res.json(r);
+        } else {
+            res.json({user:false,status:404,comment:"Room not found"});
+        }
+    })
+})
+
+router.get('/getRoomsMessages/:email', (req, res) => {
     console.log(req.params)
     const email = req.params.email
-    const result =  getRoomUsers(email).then((r)=>{
+    const result =  getRoomMessages(email).then((r)=>{
         if (r) {
             res.json(r);
         } else {
