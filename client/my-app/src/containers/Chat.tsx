@@ -3,12 +3,12 @@ import React,{useState, useEffect} from 'react';
 import socketIOClient from 'socket.io-client'
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {addMess, removeMess} from "../store/actions/actions";
+import {addMess, removeMess,addNotification} from "../store/actions/actions";
 import Header from '../components/Header';
 import { userInfo } from 'os';
 import { useHistory } from 'react-router-dom';
 import {updateMess} from "../api/userApi"
-
+import {connectToServer} from '../services/socket.service'
 
 //const socket = io.connect('http://localhost:5000')
 interface IMainProps {
@@ -16,7 +16,7 @@ interface IMainProps {
 }
 
 const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
-    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com`)
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
 
     const [mess,setMess] = useState('')
     const [arrmess,setArrmess] = useState<any>([])
@@ -36,22 +36,30 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     }
    
     useEffect(()=>{
-        
-        if(localStorage.getItem(props.userInf.email) === 'false'){
-            socket.emit('new-user', props.roomChat)
-            localStorage.setItem(props.userInf.email,'true')
-        }
+        connectToServer(socket,props.userInf.email,props.roomChat)
+        // if(localStorage.getItem(`${props.userInf.email}${props.roomChat}`) === 'false' || localStorage.getItem(`${props.userInf.email}${props.roomChat}`) === null){
+        //     socket.emit('new-user', props.roomChat)
+        //     localStorage.setItem(`${props.userInf.email}${props.roomChat}`,'true')
+        // }
     },[])
     // useEffect(()=>{
     //     socket.on('user-connected', (data:any) => {
     //         localStorage.setItem(data.room,'true')
     //     })
     // })
+    
     useEffect(()=>{
         socket.on('chat-message', (data:any) => {
             console.log("heredata"+arrmess)
-            if(data.email !== props.userInf.email){
-                props.addMess({mess:data.message,name:data.name})
+            console.log("herererere888888888888888888888888"+history)
+            if(window.location.pathname === '/chat'){
+                if(data.email !== props.userInf.email){
+                    props.addMess({mess:data.message,name:data.name})
+                }
+            }else{
+                props.addNotification(data.room)
+                alert("You have SMS from"+data.name)
+               
             }
         })
     })
@@ -64,7 +72,7 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     
     return (
         <div>
-            <button onClick={leaveRoom}></button>
+            <button onClick={leaveRoom}>EXIT CHAT</button>
             {props.roomChat}
             {props.mess.map((el:any)=>{ 
                 return <p>{el.name} -- {el.mess}</p>    
@@ -90,7 +98,7 @@ const mapDispatchToProps = (dispatch:any) => {
     return {
         dispatch,
         ...bindActionCreators({
-            addMess,removeMess
+            addMess,removeMess,addNotification
         }, dispatch)
     }
 }

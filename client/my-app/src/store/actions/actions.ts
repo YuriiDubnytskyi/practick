@@ -53,3 +53,17 @@ export const removeMess = () => {
         type: actionTypes.REMOVE_MESS
     }
 }
+
+export const initNotification = (initData:any) => {
+    return {
+        type: actionTypes.INIT_NOTIFICATION,
+        initData:initData
+    }
+}
+
+export const addNotification = (addData:any) => {
+    return {
+        type:actionTypes.ADD_NOTIFICATION,
+        addData:addData
+    }
+}

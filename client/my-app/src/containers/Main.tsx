@@ -27,16 +27,22 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
     //         setUsers(arr.filter((el:any)=> el.email !== props.userInf.email))
     //     })
     // },[])
-    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com`)
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
     const socket = socketIOClient(endpoint);
     let history = useHistory();
     useEffect(()=>{
         if(props.userInf.name===''){
+            for (let [key, value] of Object.entries(localStorage)) {
+                if(key !== "access_token" && key !== "id_token" && key !== "expires_at" && key !== "scopes"){
+                    localStorage.setItem(key,'false')
+                }
+            }
             history.push('/about')
         }
-        if(localStorage.getItem(props.userInf.email) === null){
-            localStorage.setItem(props.userInf.email,'false')
-        }        
+
+        // if(localStorage.getItem(props.userInf.email) === null){
+        //     localStorage.setItem(props.userInf.email,'false')
+        // }        
     },[])
     const startChat = (nickname:any) =>{
         const data ={
@@ -45,7 +51,8 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
         }
         console.log("chat"+data)
         createOrSearchChat(data.id1,data.id2).then((res)=>{
-            addRoom(res.room)
+            props.addRoom(res.room)
+        }).then(()=>{
             history.push('/chat')
         })
 

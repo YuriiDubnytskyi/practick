@@ -10,12 +10,14 @@ import user from "./store/reducers/user"
 import users from "./store/reducers/users"
 import messages from "./store/reducers/messages"
 import room from "./store/reducers/room"
+import notifications from './store/reducers/notifications'
 
 const rootReducer = combineReducers({
   user:user,
   users:users,
   messages:messages,
-  room:room
+  room:room,
+  notifications:notifications
 });
 
 const logger = (store:any) => {

@@ -35,7 +35,8 @@ io.on('connection', socket => {
     console.log("here room"+room)
   })
   socket.on('send-chat-message', (room, message,email,name) => {
-    socket.to(room).broadcast.emit('chat-message', { message: message,email,name})
+    console.log({message,room})
+    socket.to(room).broadcast.emit('chat-message', { message: message,email,name,room})
   })
  
 })
