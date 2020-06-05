@@ -7,7 +7,7 @@ export default class Auth {
     this.requestedScopes = "openid profile email read:courses";
     this.auth0 = new auth0.WebAuth({
       domain: "yurii-dubnytskyi.eu.auth0.com",
-      clientID: "Vlvnr3poW9Ors21ydAosVRRpVncQlvqS",
+      clientID: "LMh9Ao2isV5ay0EJAFQIGW9oqEAQNBy9",
       redirectUri: `https://practick.herokuapp.com/callback`,
       //redirectUri:`http://localhost:3000/callback`,
       responseType: "token id_token",
@@ -66,7 +66,7 @@ export default class Auth {
     localStorage.removeItem("scopes");
     this.userProfile = null;
     this.auth0.logout({
-      clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+      clientID: "LMh9Ao2isV5ay0EJAFQIGW9oqEAQNBy9",
       returnTo: `https://practick.herokuapp.com`
       //returnTo: `http://localhost:3000`
     });

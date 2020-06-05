@@ -1,5 +1,6 @@
 import React,{FC , useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
+import './CallBack.css'
 interface ICallBackProps {
     auth:any,
     location:any
@@ -21,9 +22,11 @@ const CallBack:FC<ICallBackProps> = (props) => {
           }
     },[])
     return (
-        <div>
+        //Start---------------
+        <div className=''>
             Loading...
         </div>
+        //End-----------------
   )
 };
 

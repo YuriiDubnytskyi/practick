@@ -1,8 +1,10 @@
 import React,{useState, useEffect} from 'react';
-import {getUsers,createOrSearchChat} from "../api/userApi"
+import {getUsers} from "../../api/userApi"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {getAllUsers} from "../store/actions/actions";
+import {getAllUsers} from "../../store/actions/actions";
+import UserItem from '../../components/UserItem/UserItem'
+import "./Users.css"
 
 interface IUsersProps {
   startChat:any
@@ -33,18 +35,18 @@ const Users: React.FunctionComponent<IUsersProps> = (props:any) => {
     }
 
     return (
-        <div>
-            <input placeholder="Search user" onChange={filterUsersInput}/>
-            {filterUsers.map((el:any)=>{return <><p>{el.nickname}</p><button onClick={()=>props.startChat(el.email)}>Chat+</button></>})}
-            {/* {props.users.map((el:any)=>{return <><p>{el.nickname}</p><button onClick={()=>props.startChat(el.email)}>Chat+</button></>})} */}
+        //Start -----------
+        <div className=''>
+            <input className='' placeholder="Search user" onChange={filterUsersInput}/>
+            {filterUsers.map((el:any)=>{<UserItem nickname={el.nickname} startChat={props.startChat} email={el.email}/>})}
         </div>
+        //End----------------
     )
 };
 
-const mapStateToProps = ( state:{user:any,users:any} ) => {
+const mapStateToProps = ( state:{user:any} ) => {
     return {
-        userInf:state.user,
-        userAll:state.users.users
+        userInf:state.user
     }
 };
 const mapDispatchToProps = (dispatch:any) => {
@@ -57,4 +59,3 @@ const mapDispatchToProps = (dispatch:any) => {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Users);
-//  export default Users

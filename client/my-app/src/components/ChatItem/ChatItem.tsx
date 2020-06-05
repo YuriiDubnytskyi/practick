@@ -1,17 +1,18 @@
 import React,{useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {addRoom,addInitMess} from "../store/actions/actions";
+import {addRoom,addInitMess} from "../../store/actions/actions";
 import { useHistory } from 'react-router-dom';
-import {getChatMessages} from '../api/userApi'
-import {findUser} from '../services/users.service'
+import {getChatMessages} from '../../api/userApi'
+import {findUser} from '../../services/users.service'
+import './ChatItem.css'
+
 
 interface IChatItemProps {
     data:any
 }
 
 const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
-    const [item,setItem] = useState<any>([])
     const [message,setMess] = useState<any>([])
     const [users,setUsers] = useState<any>('')
     const [room,setRoom] = useState<any>('')
@@ -30,27 +31,27 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
     const chatGo = () => {
         if(props.notification[0][room] !== 0){
             getChatMessages(room).then((mes)=>{
-                console.log("mmmmmeeeessss"+mes)
+
                 props.addInitMess(mes)        
             })
         }else{
             props.addInitMess(message)
         }
-        console.log("hereMess"+props.data)
+       
         props.addRoom(room)
         history.push('/chat')
     }
     return (
-        <div>
-            <p>
+        //Start Style ------------
+        <div className=''>
+            <p className=''>
                 {findUser(props.userAll,users)}
             </p>
-            <button onClick={chatGo}>Go Chat</button>
-            <p>{props.notification.length === 0? <></>:<>{props.notification[0][room]}</>}
+            <button className='' onClick={chatGo}>Go Chat</button>
+            <p className=''>{props.notification.length === 0? <></>:<>{props.notification[0][room]}</>}
             </p>
-            
-    
         </div>
+        //End -------------
     )
 };
 
