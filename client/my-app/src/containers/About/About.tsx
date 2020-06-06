@@ -1,11 +1,12 @@
 import React,{useEffect,useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../components/Header'
-import {createUser,updateUser,deleteUserAcount} from "../api/userApi"
-import {userAuth,getUser} from "../services/auth.service"
+import Header from '../../components/Header/Header'
+import {createUser,updateUser,deleteUserAcount} from "../../api/userApi"
+import {userAuth,getUser} from "../../services/auth.service"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {setUserData,updateUserData,deleteUser} from "../store/actions/actions";
+import {setUserData,updateUserData,deleteUser} from "../../store/actions/actions";
+import "./About.css"
 
 interface IAboutProps {
     auth:any
@@ -40,9 +41,7 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
                 
                 
                 : history.push('/verified'))
-                // .then((dat:any) => 
-                //             userAuth(profile).then((res:any)=> res ? dat ? console.log(dat) :  console.log("heredata"+dat)//createUser({email,nickname,name,family_name})
-                //         : history.push('/verified')))
+    
             })
         }else{
             showObject(props.userInf,true)
@@ -53,7 +52,6 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
         let userId
         if(idd){
             setId(obg.id)
-            console.log("hereTrue")
             userId=obg.id
         }else{
             setId(obg._id)
@@ -64,7 +62,7 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
         setEmail(obg.email)
         setNickname(obg.nickname)
         setFamilyName(obg.family_name)
-        console.log(obg)
+      
         let user = {name:obg.name,email:obg.email,nickname:obg.nickname,family_name:obg.family_name,id:userId}
         props.setUserData(user)
     }
@@ -91,21 +89,26 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
         })
     }
     return (
-        <div>
+
+        //Start ---------------
+
+        <div className=''>
             <Header auth={props.auth}/>
-            Hello from about
-            -{name}-{email}-{nickname}-{family_name}
-            <p>Your Account</p>
-            <p>Name -- {name}</p>
-            {update ? <input value={name} name="name" onChange={(e:any)=> setName(e.target.value)}/>:<></>}
-            <p>Surname -- {family_name}</p>
-            {update ? <input value={family_name} name="family_name" onChange={(e:any)=> setFamilyName(e.target.value)}/>:<></>}
-            <p>Nickname -- {nickname} users can find you</p>
-            {update ? <input value={nickname} name="nickname" onChange={(e:any)=> setNickname(e.target.value)}/>:<></>}
-            { update ? <><button onClick={saveUpdates}>Save</button><button onClick={canselUpdates}>Cansel</button></>: <button onClick={()=> setUpdate(true)}>Update</button> }
-            <p>Danger Zone</p>
-            <button onClick={deleteAcount}>DELETE ACOUNT</button>   
+            <p className=''>Your Account</p>
+            <p className=''>Name -- {name}</p>
+            {update ? <input className='' value={name} name="name" onChange={(e:any)=> setName(e.target.value)}/>:<></>}
+            <p className=''>Surname -- {family_name}</p>
+            {update ? <input className='' value={family_name} name="family_name" onChange={(e:any)=> setFamilyName(e.target.value)}/>:<></>}
+            <p className=''>Nickname -- {nickname} users can find you</p>
+            {update ? <input className='' value={nickname} name="nickname" onChange={(e:any)=> setNickname(e.target.value)}/>:<></>}
+            { update ? <><button className='' onClick={saveUpdates}>Save</button>
+                        <button className='' onClick={canselUpdates}>Cansel</button></>
+                    : <button className='' onClick={()=> setUpdate(true)}>Update</button> }
+            <p className=''>Danger Zone</p>
+            <button  className='' onClick={deleteAcount}>DELETE ACOUNT</button>   
         </div>
+
+        //End -----------
     )
 };
 

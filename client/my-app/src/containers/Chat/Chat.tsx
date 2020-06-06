@@ -1,14 +1,12 @@
 import React,{useState, useEffect} from 'react';
-
 import socketIOClient from 'socket.io-client'
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {addMess, removeMess,addNotification} from "../store/actions/actions";
-import Header from '../components/Header';
-import { userInfo } from 'os';
+import {addMess, removeMess,addNotification} from "../../store/actions/actions";
 import { useHistory } from 'react-router-dom';
-import {updateMess} from "../api/userApi"
-import {connectToServer} from '../services/socket.service'
+import {updateMess} from "../../api/userApi"
+import {connectToServer} from '../../services/socket.service'
+import './Chat.css'
 
 //const socket = io.connect('http://localhost:5000')
 interface IMainProps {
@@ -17,7 +15,6 @@ interface IMainProps {
 
 const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-
     const [mess,setMess] = useState('')
     const [arrmess,setArrmess] = useState<any>([])
     let history = useHistory();
@@ -30,23 +27,14 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
         socket.emit('send-chat-message', props.roomChat, mess, props.userInf.email, props.userInf.name)
         let data = props.mess
         data.push({mess,name:props.userInf.name})
-        console.log('66666666666666666666666')
         updateMess({room:props.roomChat,mess:data})
         setMess('')
     }
    
     useEffect(()=>{
         connectToServer(socket,props.userInf.email,props.roomChat)
-        // if(localStorage.getItem(`${props.userInf.email}${props.roomChat}`) === 'false' || localStorage.getItem(`${props.userInf.email}${props.roomChat}`) === null){
-        //     socket.emit('new-user', props.roomChat)
-        //     localStorage.setItem(`${props.userInf.email}${props.roomChat}`,'true')
-        // }
     },[])
-    // useEffect(()=>{
-    //     socket.on('user-connected', (data:any) => {
-    //         localStorage.setItem(data.room,'true')
-    //     })
-    // })
+
     
     useEffect(()=>{
         socket.on('chat-message', (data:any) => {
@@ -65,21 +53,22 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     })
         
     const leaveRoom = () => {
-        //updateMess({room:props.roomChat,mess:props.mess})
         props.removeMess()
         history.push('/main')
     }
     
     return (
-        <div>
-            <button onClick={leaveRoom}>EXIT CHAT</button>
-            {props.roomChat}
+        //Start-----------
+        <div className=''>
+            <button className='' onClick={leaveRoom}>EXIT CHAT</button>
+            <p className=''>{props.roomChat}</p>
             {props.mess.map((el:any)=>{ 
-                return <p>{el.name} -- {el.mess}</p>    
+                return <p className=''>{el.name} -- {el.mess}</p>    
             })}
-            <input value={mess} onChange={(e:any)=>setMess(e.target.value)}/>
-            <button onClick={sendMsg}>Send</button>
+            <input className='' value={mess} onChange={(e:any)=>setMess(e.target.value)}/>
+            <button className='' onClick={sendMsg}>Send</button>
         </div>
+        //End-------------------
     )
 
 };

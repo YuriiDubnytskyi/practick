@@ -1,12 +1,12 @@
 import React,{useState, useEffect} from 'react';
-import {getChatUsers} from "../api/userApi"
-import ChatItem from '../components/ChatItem'
+import {getChatUsers} from "../../api/userApi"
+import ChatItem from '../../components/ChatItem/ChatItem'
 import socketIOClient from 'socket.io-client'
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {addMess, removeMess,initNotification,addNotification} from "../store/actions/actions";
-import {connectToServer} from '../services/socket.service'
-
+import {addMess, removeMess,initNotification,addNotification} from "../../store/actions/actions";
+import {connectToServer} from '../../services/socket.service'
+import './ChatList.css'
 
 interface IUsersProps {
     email:any
@@ -24,11 +24,6 @@ const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
             res.map((el:any)=>{
                 connectToServer(socket,props.email,el.room)
                 dat[el.room]=0
-                // if(localStorage.getItem(`${props.email}${el.room}`) === null || localStorage.getItem(`${props.email}${el.room}`) === 'false'){
-                //     socket.emit('new-user', el.room)
-                //     console.log("11111111111111")
-                //     localStorage.setItem(`${props.email}${el.room}`,'true')
-                // }
             })
             props.initNotification(dat)
             
@@ -52,7 +47,8 @@ const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
     })
 
     return (
-        <div>
+        //Start ----------------
+        <div className=''>
             {data.map((el:any)=>{
                 return (
                     <>
@@ -61,6 +57,7 @@ const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
                 )
             })}
         </div>
+        //End-------------------
     )
 };
 

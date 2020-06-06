@@ -1,9 +1,9 @@
 import  React ,{FC} from 'react';
 import {Route,Switch,Redirect} from 'react-router-dom';
-import About from "../containers/About";
-import Main from "../containers/Main";
-import AuthPage from './AuthPage';
-import Chat from '../containers/Chat'
+import About from "../containers/About/About";
+import Main from "../containers/Main/Main";
+import AuthPage from '../containers/AuthPage/AuthPage';
+import Chat from '../containers/Chat/Chat'
 
 interface IHomeProps {
     auth:any
