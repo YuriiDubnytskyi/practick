@@ -41,7 +41,7 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
         socket.on('chat-message', (data:any) => {
             console.log("heredata"+arrmess)
             console.log("herererere888888888888888888888888"+history)
-            if(window.location.pathname === '/chat'){
+            if(window.location.pathname === '/chat/'+data.room){
                 if(data.email !== props.userInf.email){
                     props.addMess({mess:data.message,name:data.name})
                 }

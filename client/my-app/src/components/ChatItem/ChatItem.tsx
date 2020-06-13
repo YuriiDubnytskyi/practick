@@ -39,7 +39,7 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
         }
        
         props.addRoom(room)
-        history.push('/chat')
+        history.push('/chat/'+room)
     }
     return (
         //Start Style ------------

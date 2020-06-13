@@ -32,8 +32,9 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
         }
         createOrSearchChat(data.id1,data.id2).then((res)=>{
             props.addRoom(res.room)
-        }).then(()=>{
-            history.push('/chat')
+            return res
+        }).then((res)=>{
+            history.push('/chat/'+res.room)
         })
     }
     
