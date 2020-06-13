@@ -7,10 +7,10 @@ interface ISingInLogInProps {
 const SingInLogIn: React.FunctionComponent<ISingInLogInProps> = (props) => {
     return (
         //Start ------------
-        <div className=''>
-            <p className=''>Hello from singin login</p>
-            <button className='' onClick={props.auth.login}>Log In</button>
-            <button className='' onClick={props.auth.login}>Sing In</button>
+        <div className='SingIn' >
+            <h4>Hello, please Sign In or Login</h4>
+            <button className='Button111' onClick={props.auth.login}>Login</button>
+            <button className='Button222' onClick={props.auth.login}>Sign In</button>
         </div>
         //End------------
     )

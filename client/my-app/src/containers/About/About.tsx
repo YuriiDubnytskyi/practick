@@ -92,20 +92,22 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
 
         //Start ---------------
 
-        <div className=''>
+        <div className='About'>
             <Header auth={props.auth}/>
             <p className=''>Your Account</p>
             <p className=''>Name -- {name}</p>
             {update ? <input className='' value={name} name="name" onChange={(e:any)=> setName(e.target.value)}/>:<></>}
             <p className=''>Surname -- {family_name}</p>
             {update ? <input className='' value={family_name} name="family_name" onChange={(e:any)=> setFamilyName(e.target.value)}/>:<></>}
-            <p className=''>Nickname -- {nickname} users can find you</p>
+            <p className=''>Nickname -- {nickname}</p>
             {update ? <input className='' value={nickname} name="nickname" onChange={(e:any)=> setNickname(e.target.value)}/>:<></>}
-            { update ? <><button className='' onClick={saveUpdates}>Save</button>
-                        <button className='' onClick={canselUpdates}>Cansel</button></>
-                    : <button className='' onClick={()=> setUpdate(true)}>Update</button> }
-            <p className=''>Danger Zone</p>
-            <button  className='' onClick={deleteAcount}>DELETE ACOUNT</button>   
+            { update ? <><button className='Button4' onClick={saveUpdates}>Save</button>
+                        <button className='Button3' onClick={canselUpdates}>Cancel</button></>
+                    : <button className='Button2' onClick={()=> setUpdate(true)}>Update</button> }
+            <div className='DangerZone'>
+                <p className='Text'>Danger Zone</p>
+                <button  className='Button11' onClick={deleteAcount}>DELETE ACOUNT</button>
+            </div>   
         </div>
 
         //End -----------

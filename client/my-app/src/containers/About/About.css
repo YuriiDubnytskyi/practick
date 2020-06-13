@@ -1,0 +1,80 @@
+.DangerZone
+{
+  border:1px solid rgba(131, 132, 138, 1);
+  width:170px;
+  float:right;
+  background-color: red;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+}
+
+.About button{
+  text-decoration:none;
+	margin: 0 auto;
+	text-align:center;
+	border-radius:30px;
+
+}
+
+.Text
+{
+  background-color: red;
+font-size: larger;
+
+}
+
+
+.Button11{
+	border:1px solid rgba(131, 132, 138, 1);
+	background:rgba(62, 71, 188, 1);
+  color:orange;
+  width: 90px;
+  height: 70px;
+  margin: 10px;
+}
+
+.Button11:hover{
+  background:rgba(156, 159, 198, 1);
+
+}
+
+.Button2{
+  border:1px solid rgba(131, 132, 138, 1);
+	background:rgba(62, 71, 188, 1);
+  color:orange;
+  width: 70px;
+  height: 60px;
+  margin: 10px;
+
+
+}
+
+.Button2:hover{
+  background:rgba(156, 159, 198, 1);
+
+}
+
+.Button3{
+
+  border:1px solid rgba(131, 132, 138, 1);
+	background:rgba(62, 71, 188, 1);
+  color:orange;
+  width: 80px;
+  height: 50px;
+}
+.Button3:hover{
+  background:rgba(156, 159, 198, 1);
+
+}
+.Button4{
+
+  border:1px solid rgba(131, 132, 138, 1);
+	background:rgba(62, 71, 188, 1);
+  color:orange;
+  width: 70px;
+  height: 50px;
+}
+.Button4:hover{
+  background:rgba(156, 159, 198, 1);
+
+}

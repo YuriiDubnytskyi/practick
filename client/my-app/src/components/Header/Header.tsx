@@ -8,9 +8,10 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     return (
-        <div className=''>
+        <div className='Header'>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 
+                    <div className='div1'>
                     <ul className="navbar-nav">        
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/main">Main</NavLink>
@@ -22,6 +23,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                             LogOut
                         </button>
                     </ul>
+                    </div>
             
             </nav>
         </div>

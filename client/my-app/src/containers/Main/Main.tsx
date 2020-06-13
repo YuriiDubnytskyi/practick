@@ -40,10 +40,12 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
     return (
         //Start --------------
         <div className=''>
-            <div className=''>
+            <div className='Main'>
                 <Header auth={props.auth}/>
                 <Users startChat={startChat}/>
-                <ChatList email={props.userInf.email}/>
+                <div className='ChatList'>
+                    <ChatList email={props.userInf.email}/>
+                </div>
             </div>
         </div>
         //End ---------------

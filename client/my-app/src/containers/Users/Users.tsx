@@ -37,7 +37,7 @@ const Users: React.FunctionComponent<IUsersProps> = (props:any) => {
     return (
         //Start -----------
         <div className=''>
-            <input className='' placeholder="Search user" onChange={filterUsersInput}/>
+            <input className='Search' placeholder="Search user" onChange={filterUsersInput}/>
             {filterUsers.map((el:any)=>{return <UserItem nickname={el.nickname} startChat={props.startChat} email={el.email}/>})}
         </div>
         //End----------------

@@ -1,0 +1,35 @@
+
+.SingIn
+{
+  text-align: center;
+  background-color: #DAFAE3;
+}
+.SingIn button{
+	margin: 0 auto;
+	text-align:center;
+	line-height:40px;
+	border-radius:30px;
+}
+
+.Button111{
+	border:1px solid rgba(131, 132, 138, 1);
+	background:rgba(62, 71, 188, 1);
+  color:orange;
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+}
+.Button111:hover{
+	background:rgba(156, 159, 198, 1);
+}
+.Button222{
+	border:1px solid rgba(255, 0, 0, 1);
+	background:rgba(246, 128, 128, 1);
+  color:rgba(89, 209, 65, 1);
+  width: 100px;
+  height: 50px;
+  margin: 10px;
+}
+.Button222:hover{
+	background:rgba(212, 44, 222, 1);
+}

@@ -1,0 +1,24 @@
+.GoChat{
+    border: 3px solid red;
+    width: 180px;
+    margin: 10px;
+
+
+}
+.GoChat button{
+    margin: 0 auto;
+	text-align:center;
+	line-height:40px;
+	border-radius:35px;
+
+}
+.Button1{
+	border:1px solid rgba(131, 132, 138, 1);
+	background:rgba(12, 236, 31, 0.685);
+  width: 70px;
+  height: 40px;
+  margin: 10px;
+}
+.Button1:hover{
+	background:rgb(149, 250, 163);
+}
