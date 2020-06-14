@@ -1,80 +1,62 @@
-.DangerZone
-{
-  border:1px solid rgba(131, 132, 138, 1);
-  width:170px;
-  float:right;
-  background-color: red;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: large;
+.About{
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background: #fff241;
+  background: linear-gradient(to right, #ebd511, #d20afa) no-repeat 0 0 / cover;
+  color: #fff;
 }
 
 .About button{
-  text-decoration:none;
-	margin: 0 auto;
-	text-align:center;
-	border-radius:30px;
-
+  border-radius: 20px;
+  border: 1px solid #f3f3f3;
+  background: #23bebe;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 35px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.Text
-{
-  background-color: red;
-font-size: larger;
-
+.About input{
+  background: transparent;
+  border: 2px solid white;
+  color:white;
 }
 
+button.Update{
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
 
-.Button11{
-	border:1px solid rgba(131, 132, 138, 1);
-	background:rgba(62, 71, 188, 1);
-  color:orange;
-  width: 90px;
-  height: 70px;
+button.Cancel{
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
   margin: 10px;
 }
 
-.Button11:hover{
-  background:rgba(156, 159, 198, 1);
-
+button.Save{
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+  margin:10px;
+  }
+  
+button.DA{
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
 }
 
-.Button2{
-  border:1px solid rgba(131, 132, 138, 1);
-	background:rgba(62, 71, 188, 1);
-  color:orange;
-  width: 70px;
-  height: 60px;
-  margin: 10px;
-
-
-}
-
-.Button2:hover{
-  background:rgba(156, 159, 198, 1);
-
-}
-
-.Button3{
-
-  border:1px solid rgba(131, 132, 138, 1);
-	background:rgba(62, 71, 188, 1);
-  color:orange;
-  width: 80px;
-  height: 50px;
-}
-.Button3:hover{
-  background:rgba(156, 159, 198, 1);
-
-}
-.Button4{
-
-  border:1px solid rgba(131, 132, 138, 1);
-	background:rgba(62, 71, 188, 1);
-  color:orange;
-  width: 70px;
-  height: 50px;
-}
-.Button4:hover{
-  background:rgba(156, 159, 198, 1);
-
+.DZ{
+  margin:50px;
+  border: 2px solid red;
 }

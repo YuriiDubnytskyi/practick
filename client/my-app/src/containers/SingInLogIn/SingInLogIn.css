@@ -1,35 +1,57 @@
-
-.SingIn
-{
-  text-align: center;
-  background-color: #DAFAE3;
+*{
+  box-sizing: border-box;
 }
+body{
+  font-family: 'Teko', sans-serif;
+  background: #86235a;
+  margin: -20px 0 50px;
+}
+h1{
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  margin: 0;
+}
+p{
+  font-size: 18px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+.SignIn2{
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: #fff241;
+    background: linear-gradient(to right, #ebd511, #d20afa) no-repeat 0 0 / cover;
+    color: #fff;
+}
+
 .SingIn button{
-	margin: 0 auto;
-	text-align:center;
-	line-height:40px;
-	border-radius:30px;
+	border-radius: 20px;
+    border: 1px solid #f3f3f3;
+    background: #23bebe;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.Button111{
-	border:1px solid rgba(131, 132, 138, 1);
-	background:rgba(62, 71, 188, 1);
-  color:orange;
-  width: 100px;
-  height: 50px;
+button.BSi{
+  background: transparent;
+  border-color: #fff;
   margin: 10px;
 }
-.Button111:hover{
-	background:rgba(156, 159, 198, 1);
-}
-.Button222{
-	border:1px solid rgba(255, 0, 0, 1);
-	background:rgba(246, 128, 128, 1);
-  color:rgba(89, 209, 65, 1);
-  width: 100px;
-  height: 50px;
+button.BSu{
+	background: transparent;
+  border-color: #fff;
   margin: 10px;
-}
-.Button222:hover{
-	background:rgba(212, 44, 222, 1);
 }

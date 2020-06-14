@@ -1,0 +1,32 @@
+.Verify{
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: #fff241;
+    background: linear-gradient(to right, #ebd511, #d20afa) no-repeat 0 0 / cover;
+    color: #fff;
+
+}
+
+.Verify button{
+	border-radius: 20px;
+    border: 1px solid #f3f3f3;
+    background: #23bebe;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+button.BSi1{
+    background: transparent;
+  border-color: #fff;
+}
