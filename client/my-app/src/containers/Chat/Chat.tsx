@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import {updateMess} from "../../api/userApi"
 import {connectToServer} from '../../services/socket.service'
 import './Chat.css'
+import { userInfo } from 'os';
 
 //const socket = io.connect('http://localhost:5000')
 interface IMainProps {
@@ -18,6 +19,7 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     const [endpoint,setEndpoint] = useState(`localhost:5000`)
     const [mess,setMess] = useState('')
     const [arrmess,setArrmess] = useState<any>([])
+    const [chatUser,setUserChat] = useState('')
     let history = useHistory();
     const socket = socketIOClient(endpoint);
 
@@ -33,9 +35,24 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     }
    
     useEffect(()=>{
-        connectToServer(socket,props.userInf.email,props.roomChat)
+        if(props.userInf.name===''){
+            for (let [key, value] of Object.entries(localStorage)) {
+                if(key !== "access_token" && key !== "id_token" && key !== "expires_at" && key !== "scopes"){
+                    localStorage.setItem(key,'false')
+                }
+            }
+            history.push('/about')
+        }else{
+            connectToServer(socket,props.userInf.email,props.roomChat)
+            const userEmail =props.roomChat.replace(props.userInf.email,'')
+            const userE = props.userAll.filter((el:any)=>el.email===userEmail) 
+            setUserChat(userE[0].name)
+        }
+        
     },[])
-
+    useEffect(()=>{
+        
+    },[])
     
     useEffect(()=>{
         socket.on('chat-message', (data:any) => {
@@ -58,16 +75,39 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
         history.push('/main')
     }
     
+    const keyPressed = (e:any) => {
+        if(e.key === "Enter"){
+            sendMsg()
+        }
+    }
+
     return (
         //Start-----------
         <div className=''>
-            <button className='' onClick={leaveRoom}>EXIT CHAT</button>
-            <p className=''>{props.roomChat}</p>
-            {props.mess.map((el:any)=>{ 
-                return <p className=''>{el.name} -- {el.mess}</p>    
-            })}
-            <input className='' value={mess} onChange={(e:any)=>setMess(e.target.value)}/>
-            <button className='' onClick={sendMsg}>Send</button>
+            <header className='header-chat'>
+                <div className="logo1"><p className="logo__text1">Dubnytskyi Corporation</p></div>
+                <p className='header-p'>
+                    <button className='header-btn' onClick={leaveRoom}>EXIT CHAT</button>
+                </p>
+                <div className="logo2"><p className="logo__text2">Dubnytskyi Corporation</p></div>
+            </header>  
+            
+            <p className='title-room'>{chatUser}---{props.userInf.name}</p>
+            <div className='chat-mess'>
+                {props.mess.map((el:any)=>{ 
+                    if(el.name === props.userInf.name){
+                        return <p className='right-mess'>{el.mess}</p> 
+                    }else{
+                        return <p className='left-mess'>{el.mess}</p> 
+                    }   
+                })}
+            </div>
+            <div className='send-mess'>
+                <textarea rows={3} className='send-mess_input' value={mess} onChange={(e:any)=>setMess(e.target.value)} onKeyPress={keyPressed}></textarea>
+                <button className='send-mess_btn' onClick={sendMsg}>Send</button>
+            </div>
+
+            
         </div>
         //End-------------------
     )
