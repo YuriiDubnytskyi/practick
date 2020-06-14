@@ -41,8 +41,8 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
     return (
         //Start --------------
         <div className=''>
-            <div className=''>
-                <Header auth={props.auth}/>
+            <Header auth={props.auth}/>
+            <div className='main-container'>    
                 <Users startChat={startChat}/>
                 <ChatList email={props.userInf.email}/>
             </div>

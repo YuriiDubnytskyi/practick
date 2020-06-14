@@ -10,9 +10,9 @@ interface IChatItemProps {
 const UserItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
     return (
         //Style --------------
-        <div className=''>
-            <p className=''>{props.nickname}</p>
-            <button className='' onClick={()=>props.startChat(props.email)}>Chat+</button>
+        <div className='user-chat'>
+            <p className='user-nickname'>{props.nickname}</p>
+            <button className='btn--speak' onClick={()=>props.startChat(props.email)}>Chat+</button>
         </div>
         //End -------------
     )

@@ -50,7 +50,7 @@ const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
 
     return (
         //Start ----------------
-        <div className=''>
+        <div className='chatlist-container'>
             {data.map((el:any)=>{
                 return (
                     <>

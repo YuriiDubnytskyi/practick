@@ -43,13 +43,18 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
     }
     return (
         //Start Style ------------
-        <div className=''>
-            <p className=''>
-                {findUser(props.userAll,users)}
-            </p>
-            <button className='' onClick={chatGo}>Go Chat</button>
-            <p className=''>{props.notification.length === 0? <></>:<>{props.notification[0][room]}</>}
-            </p>
+        <div className='chat-item-container'>
+            <div className='chat-info'>
+               <p className='chat-user'>
+                    {findUser(props.userAll,users)}
+                </p>
+                <p className='chat-nitification'>{props.notification.length === 0? <></>:<>{props.notification[0][room]}</>}
+                </p> 
+            </div>
+            
+            <button className='btn--startchat' onClick={chatGo}>Go Chat</button>
+            
+            
         </div>
         //End -------------
     )
