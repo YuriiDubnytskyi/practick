@@ -1,0 +1,48 @@
+.ChatRoom{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center; 
+    background: linear-gradient(to right, #e9d419af, #d20afa) no-repeat 0 0 / cover;
+    color: #fff;
+
+}
+
+.NameChatRoom{
+    text-align: center;
+}
+.BChat{
+    display:grid;
+
+}
+
+.ChatRoom button{
+    border-radius: 20px;
+    border: 1px solid #f3f3f3;
+    background: #23bebe;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 35px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  button.BEChat{
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+  
+  }
+
+.Message{
+    background: transparent;
+    border: 1px solid white;
+    color:white;
+}
+button.BSend{
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+
+}

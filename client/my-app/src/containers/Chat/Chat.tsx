@@ -60,14 +60,18 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     
     return (
         //Start-----------
-        <div className=''>
-            <button className='' onClick={leaveRoom}>EXIT CHAT</button>
-            <p className=''>{props.roomChat}</p>
+        <div className='ChatRoom'>
+            <div className='BChat'>
+                <button className='BEChat' onClick={leaveRoom}>EXIT CHAT</button>
+            </div>
+            <p className='NameChatRoom'>{props.roomChat}</p>
             {props.mess.map((el:any)=>{ 
                 return <p className=''>{el.name} -- {el.mess}</p>    
             })}
-            <input className='' value={mess} onChange={(e:any)=>setMess(e.target.value)}/>
-            <button className='' onClick={sendMsg}>Send</button>
+            <div>
+            <input className='Message' placeholder='Type a message' value={mess} onChange={(e:any)=>setMess(e.target.value)}/>
+            <button className='BSend' onClick={sendMsg}>Send</button>
+            </div>
         </div>
         //End-------------------
     )
