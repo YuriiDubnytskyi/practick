@@ -38,8 +38,7 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
     }
     
     return (
-        //Start --------------
-        <div className='Main'>
+        //Start -------------
             <div className='Main2'>
                 <div className='Header'>
                     <Header auth={props.auth}/>
@@ -51,7 +50,6 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
                 <ChatList email={props.userInf.email}/>
                 </div>                
             </div>
-        </div>
         //End ---------------
     )
 };

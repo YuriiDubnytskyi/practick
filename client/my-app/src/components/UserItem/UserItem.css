@@ -1,0 +1,16 @@
+.Chattt{
+    border:1px solid white;
+  border-radius: 20px;
+  margin: 5px;
+  width: 20%;
+  float: right;
+  text-align: center;
+}
+
+button.ChButton{
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+    margin: 5px;
+
+}

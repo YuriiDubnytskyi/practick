@@ -8,7 +8,7 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     return (
-        <div className='Header'>
+        <div className='Header1'>
             <nav className="navbar navbar-expand-lg navbar-light">
                 
                     <div className='div1'>

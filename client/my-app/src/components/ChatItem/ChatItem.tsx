@@ -48,7 +48,7 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
                 <p className=''>
                     {findUser(props.userAll,users)}
                 </p>
-                <button className='GoChat' onClick={chatGo}>Go Chat</button>
+                <button className='GoChatB' onClick={chatGo}>Go Chat</button>
                 <p> Unread messages: {props.notification.length === 0? <></>:<>{props.notification[0][room]}</>}
                 </p>
             </div>

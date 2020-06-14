@@ -1,5 +1,8 @@
 .GoChat{
   border:1px solid white;
-  border-radius: 10px;
-
+  border-radius: 20px;
+  margin: 10px;
+  width:12%;
+  text-align: center;
 }
+
