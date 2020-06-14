@@ -92,20 +92,30 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
 
         //Start ---------------
 
-        <div className=''>
+        <div>
             <Header auth={props.auth}/>
-            <p className=''>Your Account</p>
-            <p className=''>Name -- {name}</p>
-            {update ? <input className='' value={name} name="name" onChange={(e:any)=> setName(e.target.value)}/>:<></>}
-            <p className=''>Surname -- {family_name}</p>
-            {update ? <input className='' value={family_name} name="family_name" onChange={(e:any)=> setFamilyName(e.target.value)}/>:<></>}
-            <p className=''>Nickname -- {nickname} users can find you</p>
-            {update ? <input className='' value={nickname} name="nickname" onChange={(e:any)=> setNickname(e.target.value)}/>:<></>}
-            { update ? <><button className='' onClick={saveUpdates}>Save</button>
-                        <button className='' onClick={canselUpdates}>Cansel</button></>
-                    : <button className='' onClick={()=> setUpdate(true)}>Update</button> }
-            <p className=''>Danger Zone</p>
-            <button  className='' onClick={deleteAcount}>DELETE ACOUNT</button>   
+            <div className='wrapper_about'> 
+                <div className='about-container'>
+                    <div>
+                        <p className='title'>Your Account</p>
+                        <p className='user-value'>Name -- {name}</p>
+                        {update ? <input className='user-value_input' value={name} name="name" onChange={(e:any)=> setName(e.target.value)}/>:<></>}
+                        <p className='user-value'>Surname -- {family_name}</p>
+                        {update ? <input className='user-value_input' value={family_name} name="family_name" onChange={(e:any)=> setFamilyName(e.target.value)}/>:<></>}
+                        <p className='user-value'>Nickname -- {nickname} users can find you</p>
+                        {update ? <input className='user-value_input' value={nickname} name="nickname" onChange={(e:any)=> setNickname(e.target.value)}/>:<></>}
+                        { update ? <><br/><button className='btn btn--save' onClick={saveUpdates}>Save</button>
+                                <button className='btn btn--cansel' onClick={canselUpdates}>Cansel</button></>
+                            : <button className='btn btn--update' onClick={()=> setUpdate(true)}>Update</button> }
+                    </div>
+                    <div className='delete-container'>
+                        <p className='sub-title'>Danger Zone</p>
+                        <button  className='btn btn--delete' onClick={deleteAcount}>DELETE ACOUNT</button> 
+                    </div>
+                      
+                </div>
+            </div>
+            
         </div>
 
         //End -----------

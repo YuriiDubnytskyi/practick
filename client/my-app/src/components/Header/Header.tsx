@@ -8,23 +8,18 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     return (
-        <div className=''>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                
-                    <ul className="navbar-nav">        
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/main">Main</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/about">About</NavLink>
-                        </li>
-                        <button className="nav-item" onClick={()=>props.auth.logout()}>
-                            LogOut
-                        </button>
+        <header className="container-h" id="home">
+            <section className="container__header">
+                <div className="logo"><p className="logo__text">Dubnytskyi Corporation</p></div>
+                <nav className="navigation">
+                    <ul className="navigation__list">
+                        <li className="navigation__list-item"><NavLink to='/main' className="navigation__list-link">Main</NavLink></li>
+                        <li className="navigation__list-item"><NavLink to='/about' className="navigation__list-link">About</NavLink></li>
+                        <li className="navigation__list-item"><a onClick={()=>props.auth.logout()} className="navigation__list-link">LogOut</a></li>  
                     </ul>
-            
-            </nav>
-        </div>
+                </nav>
+            </section>
+        </header>
     )
 };
 

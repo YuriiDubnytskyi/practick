@@ -47,7 +47,7 @@ const SingInLogIn: React.FunctionComponent<ISingInLogInProps> = (props) => {
                         <h1 className='title'>Hello, Wanderer!</h1>
                         <p className='sub-title'>Log In or Sing In and start journey with us.</p>       
                         <button className='btn-login' onClick={props.auth.login}>Log In</button><br/>
-                        <button className='btn-singin' onClick={props.auth.login}>Sing In</button>
+                        <button className='btn-singin' onClick={props.auth.login}>Sign Up</button>
                         <div>
                             <div className="infinite-rotate1"></div> 
                             <div className="infinite-rotate2"></div> 
