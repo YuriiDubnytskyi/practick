@@ -7,10 +7,10 @@ export default class Auth {
     this.requestedScopes = "openid profile email read:courses";
     this.auth0 = new auth0.WebAuth({
       domain: "yurii-dubnytskyi.eu.auth0.com",
-      // clientID: "LMh9Ao2isV5ay0EJAFQIGW9oqEAQNBy9",
-      clientID:'iHE49mBeK4r5dzxgWwZaf3LsiQ6lUfzF',
-      //redirectUri: `https://practick.herokuapp.com/callback`,
-      redirectUri:`http://localhost:3000/callback`,
+      clientID: "LMh9Ao2isV5ay0EJAFQIGW9oqEAQNBy9",
+      //clientID:'iHE49mBeK4r5dzxgWwZaf3LsiQ6lUfzF',
+      redirectUri: `https://practick.herokuapp.com/callback`,
+      //redirectUri:`http://localhost:3000/callback`,
       responseType: "token id_token",
       scope: this.requestedScopes
     });
@@ -67,10 +67,10 @@ export default class Auth {
     localStorage.removeItem("scopes");
     this.userProfile = null;
     this.auth0.logout({
-      //clientID: "LMh9Ao2isV5ay0EJAFQIGW9oqEAQNBy9",
-      clientID:'iHE49mBeK4r5dzxgWwZaf3LsiQ6lUfzF',
-      //returnTo: `https://practick.herokuapp.com`
-      returnTo: `http://localhost:3000`
+      clientID: "LMh9Ao2isV5ay0EJAFQIGW9oqEAQNBy9",
+      //clientID:'iHE49mBeK4r5dzxgWwZaf3LsiQ6lUfzF',
+      returnTo: `https://practick.herokuapp.com`
+      //returnTo: `http://localhost:3000`
     });
   };
 

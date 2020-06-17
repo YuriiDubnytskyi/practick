@@ -15,8 +15,8 @@ interface IMainProps {
 }
 
 const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
-    //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    const [endpoint,setEndpoint] = useState(`localhost:5000`)
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    //const [endpoint,setEndpoint] = useState(`localhost:5000`)
     const [mess,setMess] = useState('')
     const [arrmess,setArrmess] = useState<any>([])
     const [chatUser,setUserChat] = useState('')
