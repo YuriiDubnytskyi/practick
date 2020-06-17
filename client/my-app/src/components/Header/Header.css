@@ -35,3 +35,7 @@
             color: #49cbcd; }
         .container__header .navigation__list-link_last-item {
           padding-right: 14px; }
+.navigation__list{
+  cursor: pointer;
+
+}

@@ -105,7 +105,7 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
                         <p className='user-value'>Nickname -- {nickname} users can find you</p>
                         {update ? <input className='user-value_input' value={nickname} name="nickname" onChange={(e:any)=> setNickname(e.target.value)}/>:<></>}
                         { update ? <><br/><button className='btn btn--save' onClick={saveUpdates}>Save</button>
-                                <button className='btn btn--cansel' onClick={canselUpdates}>Cansel</button></>
+                                <button className='btn btn--cansel' onClick={canselUpdates}>Cancel</button></>
                             : <button className='btn btn--update' onClick={()=> setUpdate(true)}>Update</button> }
                     </div>
                     <div className='delete-container'>

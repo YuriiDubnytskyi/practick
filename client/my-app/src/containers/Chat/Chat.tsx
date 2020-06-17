@@ -85,26 +85,28 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
         //Start-----------
         <div className=''>
             <header className='header-chat'>
-                <div className="logo1"><p className="logo__text1">Dubnytskyi Corporation</p></div>
+                <div className="logo1"><p className="logo__text1">WebChat</p></div>
                 <p className='header-p'>
                     <button className='header-btn' onClick={leaveRoom}>EXIT CHAT</button>
                 </p>
-                <div className="logo2"><p className="logo__text2">Dubnytskyi Corporation</p></div>
+                <div className="logo2"><p className="logo__text2">WebChat</p></div>
             </header>  
             
-            <p className='title-room'>{chatUser}---{props.userInf.name}</p>
-            <div className='chat-mess'>
-                {props.mess.map((el:any)=>{ 
-                    if(el.name === props.userInf.name){
-                        return <p className='right-mess'>{el.mess}</p> 
-                    }else{
-                        return <p className='left-mess'>{el.mess}</p> 
-                    }   
-                })}
-            </div>
-            <div className='send-mess'>
-                <textarea rows={3} className='send-mess_input' value={mess} onChange={(e:any)=>setMess(e.target.value)} onKeyPress={keyPressed}></textarea>
-                <button className='send-mess_btn' onClick={sendMsg}>Send</button>
+            <div className='wrapper2'>
+                <p className='title-room'>{chatUser}---{props.userInf.name}</p>
+                <div className='chat-mess'>
+                    {props.mess.map((el:any)=>{ 
+                        if(el.name === props.userInf.name){
+                            return <p className='right-mess'>{el.mess}</p> 
+                        }else{
+                            return <p className='left-mess'>{el.mess}</p> 
+                        }   
+                    })}
+                </div>
+                <div className='send-mess'>
+                    <textarea rows={3} className='send-mess_input' value={mess} onChange={(e:any)=>setMess(e.target.value)} onKeyPress={keyPressed}></textarea>
+                    <button className='send-mess_btn' onClick={sendMsg}>Send</button>
+                </div>
             </div>
 
             

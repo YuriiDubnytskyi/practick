@@ -10,7 +10,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     return (
         <header className="container-h" id="home">
             <section className="container__header">
-                <div className="logo"><p className="logo__text">Dubnytskyi Corporation</p></div>
+                <div className="logo"><p className="logo__text">WebChat</p></div>
                 <nav className="navigation">
                     <ul className="navigation__list">
                         <li className="navigation__list-item"><NavLink to='/main' className="navigation__list-link">Main</NavLink></li>
