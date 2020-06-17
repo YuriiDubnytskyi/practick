@@ -32,7 +32,7 @@ const Home:FC<IHomeProps> = (props:IHomeProps) => {
                     <Redirect to="/" />
                 )
             }/>
-            <Route path='/chat' exact render={props => auth.isAuthenticated() ? (
+            <Route path='/chat/:id' exact render={props => auth.isAuthenticated() ? (
                     <Chat auth={auth}/>
                 ):(
                     <Redirect to="/" />

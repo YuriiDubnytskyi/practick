@@ -1,0 +1,15 @@
+.users-container{
+    
+    width:300px;
+    overflow-y: scroll;
+    max-height: 500px;
+    min-height: 400px;
+}
+
+.search-users{
+    width: 90%;
+    margin: 0 auto;
+}
+.search-users input{
+    width: 100%;
+}

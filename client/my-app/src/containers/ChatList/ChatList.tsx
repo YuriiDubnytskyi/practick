@@ -14,8 +14,8 @@ interface IUsersProps {
 
 const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
     const [data,setData] = useState<any>([])
-    // const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    const [endpoint,setEndpoint] = useState(`localhost:5000`)
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    //const [endpoint,setEndpoint] = useState(`localhost:5000`)
     const socket = socketIOClient(endpoint);
 
     useEffect(()=>{
@@ -34,7 +34,8 @@ const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
 
     useEffect(()=>{
         socket.on('chat-message', (data:any) => {
-            if(window.location.pathname === '/chat'){
+            console.log("herelocation"+window.location)
+            if(window.location.pathname === '/chat/'+data.room){
                 console.log("herererere"+data.message)
                 if(data.email !== props.userInf.email){
                     props.addMess({mess:data.message,name:data.name})
@@ -49,7 +50,7 @@ const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
 
     return (
         //Start ----------------
-        <div className=''>
+        <div className='chatlist-container'>
             {data.map((el:any)=>{
                 return (
                     <>
