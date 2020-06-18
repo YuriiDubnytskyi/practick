@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{ useEffect} from 'react';
 import Header from '../../components/Header/Header'
 import {createOrSearchChat} from "../../api/userApi"
 import {connect} from "react-redux";
@@ -17,7 +17,7 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
     let history = useHistory();
     useEffect(()=>{
         if(props.userInf.name===''){
-            for (let [key, value] of Object.entries(localStorage)) {
+            for (let [key] of Object.entries(localStorage)) {
                 if(key !== "access_token" && key !== "id_token" && key !== "expires_at" && key !== "scopes"){
                     localStorage.setItem(key,'false')
                 }

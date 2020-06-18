@@ -13,9 +13,8 @@ interface IAboutProps {
 }
 
 const About: React.FunctionComponent<IAboutProps> = (props:any) => {
-    const [user,setUser] = useState<any>('')
+
     const [name,setName] = useState<any>('')
-    const [email,setEmail] = useState<any>('')
     const [id,setId] = useState<any>('')
     const [nickname,setNickname] = useState<any>('')
     const [family_name,setFamilyName] = useState<any>('')
@@ -25,7 +24,6 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
     useEffect(()=>{
         if(!props.userInf.isAuth){
             props.auth.getProfile((profile:any)=>{
-                setUser(profile)
                 const {email,nickname,name,family_name} = profile        
                 userAuth(profile).then((res:any)=> res ? 
                     getUser(email).then((res:any) => 
@@ -59,7 +57,6 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
         }
     
         setName(obg.name)
-        setEmail(obg.email)
         setNickname(obg.nickname)
         setFamilyName(obg.family_name)
       

@@ -12,7 +12,7 @@ const CallBack:FC<ICallBackProps> = (props) => {
         if (/access_token|id_token|error/.test(window.location.hash)) {
             console.log(history)
             props.auth.handleAuthentication(history)
-            for (let [key, value] of Object.entries(localStorage)) {
+            for (let [key] of Object.entries(localStorage)) {
               if(key !== "access_token" && key !== "id_token" && key !== "expires_at" && key !== "scopes"){
                   localStorage.removeItem(key)
               }

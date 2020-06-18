@@ -14,15 +14,15 @@ interface IUsersProps {
 
 const ChatList: React.FunctionComponent<IUsersProps> = (props:any) => {
     const [data,setData] = useState<any>([])
-    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    //const [endpoint,setEndpoint] = useState(`localhost:5000`)
+    //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    const [endpoint] = useState(`localhost:5000`)
     const socket = socketIOClient(endpoint);
 
     useEffect(()=>{
         getChatUsers(props.email).then(res=>{
             setData(res)
             const dat:any={}
-            res.map((el:any)=>{
+            res.forEach((el:any)=>{
                 connectToServer(socket,props.email,el.room)
                 dat[el.room]=0
             })

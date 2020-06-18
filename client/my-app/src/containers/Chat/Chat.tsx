@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import {updateMess} from "../../api/userApi"
 import {connectToServer} from '../../services/socket.service'
 import './Chat.css'
-import { userInfo } from 'os';
 
 //const socket = io.connect('http://localhost:5000')
 interface IMainProps {
@@ -15,10 +14,9 @@ interface IMainProps {
 }
 
 const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
-    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    //const [endpoint,setEndpoint] = useState(`localhost:5000`)
+    //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    const [endpoint] = useState(`localhost:5000`)
     const [mess,setMess] = useState('')
-    const [arrmess,setArrmess] = useState<any>([])
     const [chatUser,setUserChat] = useState('')
     let history = useHistory();
     const socket = socketIOClient(endpoint);
@@ -36,7 +34,7 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
    
     useEffect(()=>{
         if(props.userInf.name===''){
-            for (let [key, value] of Object.entries(localStorage)) {
+            for (let [key] of Object.entries(localStorage)) {
                 if(key !== "access_token" && key !== "id_token" && key !== "expires_at" && key !== "scopes"){
                     localStorage.setItem(key,'false')
                 }
@@ -50,14 +48,11 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
         }
         
     },[])
-    useEffect(()=>{
-        
-    },[])
+    
     
     useEffect(()=>{
         socket.on('chat-message', (data:any) => {
-            console.log("heredata"+arrmess)
-            console.log("herererere888888888888888888888888"+history)
+            
             if(window.location.pathname === '/chat/'+data.room){
                 if(data.email !== props.userInf.email){
                     props.addMess({mess:data.message,name:data.name})
