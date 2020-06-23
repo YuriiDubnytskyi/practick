@@ -1,8 +1,6 @@
-
-export const connectToServer = (socket:any,email:any,room:any) =>{
+export const connectToServer = (socket:any,email:string,room:string) =>{
     if(localStorage.getItem(`${email}${room}`) === null || localStorage.getItem(`${email}${room}`) === 'false'){
         socket.emit('new-user', room)
-        console.log("11111111111111")
         localStorage.setItem(`${email}${room}`,'true')
     }
 }

@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const {searchRoom,getRoomUsers,updateMess,getRoomMessages} = require('../services/chatService.js');
-//validation
+//validation to do
 const router = Router();
-
 
 router.get('/getRoom/:id1/:id2', (req, res) => {
     console.log(req.params)

@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
+import {INotificationRedux} from '../../interfaces/IRedux'
 
-const initialState:any = {
+const initialState:INotificationRedux = {
     notifications:[]
 };
 
@@ -10,7 +11,7 @@ const addNotification = (state:any,addData:any) => {
     return state 
 }
 
-const message = (state:any = initialState,action:any)=>{
+const message = (state:INotificationRedux = initialState,action:any)=>{
     switch (action.type){
         case actionTypes.INIT_NOTIFICATION:
             return updateObject(state,{

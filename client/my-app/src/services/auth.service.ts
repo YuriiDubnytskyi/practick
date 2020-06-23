@@ -1,6 +1,6 @@
 import {isUserExist} from "../api/userApi"
 
- export const userAuth = async (profile:any) =>{
+export const userAuth = async (profile:any) =>{
         console.log(!profile.email_vefified)
         if(profile.email_verified){
             return true            
@@ -9,7 +9,7 @@ import {isUserExist} from "../api/userApi"
         }
 }
 
-export const getUser = async (email:any) =>{ 
+export const getUser = async (email:string) =>{ 
     const result = await isUserExist(email)
     return await result.data
 }

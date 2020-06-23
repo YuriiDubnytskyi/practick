@@ -6,23 +6,37 @@ import {addMess, removeMess,addNotification} from "../../store/actions/actions";
 import { useHistory } from 'react-router-dom';
 import {updateMess} from "../../api/userApi"
 import {connectToServer} from '../../services/socket.service'
+import {IUserRedux,IUsersRedux,IRoomRedux,IMessagesRedux} from '../../interfaces/IRedux'
 import './Chat.css'
 
-//const socket = io.connect('http://localhost:5000')
-interface IMainProps {
-    auth:any
+interface IChatProps {
+    auth:any,
+    userInf:IUserRedux,
+    userAll:{
+        email: string,
+        family_name?: string,
+        name?: string,
+        nickname?: string,
+        __v: number,
+        _id: string
+    }[]|[],
+    mess:({
+        mess:string,
+        name:string
+    })[],
+    roomChat:string,
+    addMess:Function,removeMess:Function,addNotification:Function
 }
 
-const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
+const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
     //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    const [endpoint] = useState(`localhost:5000`)
-    const [mess,setMess] = useState('')
-    const [chatUser,setUserChat] = useState('')
+    const [endpoint] = useState<string>(`localhost:5000`)
+    const [mess,setMess] = useState<string>('')
+    const [chatUser,setUserChat] = useState<string|undefined>('')
     let history = useHistory();
     const socket = socketIOClient(endpoint);
 
     const sendMsg =()=>{
-        console.log("room"+props.roomChat)
         const socket = socketIOClient(endpoint);
         props.addMess({mess,name:props.userInf.name})
         socket.emit('send-chat-message', props.roomChat, mess, props.userInf.email, props.userInf.name)
@@ -46,13 +60,11 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
             const userE = props.userAll.filter((el:any)=>el.email===userEmail) 
             setUserChat(userE[0].name)
         }
-        
     },[])
     
     
     useEffect(()=>{
         socket.on('chat-message', (data:any) => {
-            
             if(window.location.pathname === '/chat/'+data.room){
                 if(data.email !== props.userInf.email){
                     props.addMess({mess:data.message,name:data.name})
@@ -60,7 +72,6 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
             }else{
                 props.addNotification(data.room)
                 alert("You have SMS from"+data.name)
-               
             }
         })
     })
@@ -77,7 +88,6 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
     }
 
     return (
-        //Start-----------
         <div className=''>
             <header className='header-chat'>
                 <div className="logo1"><p className="logo__text1">WebChat</p></div>
@@ -103,16 +113,13 @@ const Chat: React.FunctionComponent<IMainProps> = (props:any) => {
                     <button className='send-mess_btn' onClick={sendMsg}>Send</button>
                 </div>
             </div>
-
-            
         </div>
-        //End-------------------
     )
 
 };
 
 
-const mapStateToProps = ( state:{user:any,users:any,messages:any,room:any} ) => {
+const mapStateToProps = ( state:{user:IUserRedux,users:IUsersRedux,messages:IMessagesRedux,room:IRoomRedux} ) => {
     return {
         userInf:state.user,
         userAll:state.users.users,

@@ -7,13 +7,11 @@
     transition:.2s all; 
 }
 
-
-
-
 .chat-info{
     display: flex;
     justify-content: space-around;
 }
+
 .chat-nitification{
     margin: 10px 0 0 0;
     text-align: center;
@@ -23,6 +21,7 @@
     border-radius: 50%;
     background-color: gray;
 }
+
 .btn--startchat{
     border-radius: 20px;
     border: 1px solid #f3f3f3;
@@ -36,6 +35,7 @@
     transition: transform 80ms ease-in;
     margin: 0 30px;
 }
+
 .btn--startchat:hover{
     background-color: rgb(72, 59, 128);
     color:#f3f3f3

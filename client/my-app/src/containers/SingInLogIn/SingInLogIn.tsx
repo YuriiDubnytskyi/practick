@@ -6,7 +6,6 @@ interface ISingInLogInProps {
 
 const SingInLogIn: React.FunctionComponent<ISingInLogInProps> = (props) => {
     return (
-        //Start ------------
         <>
             <div className="wrapper">
                 <div className="main-content">
@@ -42,8 +41,6 @@ const SingInLogIn: React.FunctionComponent<ISingInLogInProps> = (props) => {
                 </ul>
             </div>
         </>
-        
-        //End------------
     )
 };
 

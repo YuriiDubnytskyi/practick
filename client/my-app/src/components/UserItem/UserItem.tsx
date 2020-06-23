@@ -1,23 +1,19 @@
 import React from 'react';
 import "./UserItem.css"
 
-interface IChatItemProps {
-    nickname:any,
-    email:any,
-    startChat:any
+interface IUserItemProps {
+    nickname:string,
+    email:string,
+    startChat:Function
 }
 
-const UserItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
+const UserItem: React.FunctionComponent<IUserItemProps> = (props:any) => {
     return (
-        //Style --------------
         <div className='user-chat'>
             <p className='user-nickname'>{props.nickname}</p>
             <button className='btn--speak' onClick={()=>props.startChat(props.email)}>Chat+</button>
         </div>
-        //End -------------
     )
 };
-
-
 
 export default UserItem;

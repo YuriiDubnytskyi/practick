@@ -22,11 +22,14 @@ const CallBack:FC<ICallBackProps> = (props) => {
           }
     },[])
     return (
-        //Start---------------
-        <div className=''>
-            Loading...
+        <div className='wrapper-loading'>
+            <div className="fancy-spinner">
+                <div className="ring"></div>
+                <div className="ring"></div>
+                <div className="dot"></div>
+            </div>
         </div>
-        //End-----------------
+        
   )
 };
 

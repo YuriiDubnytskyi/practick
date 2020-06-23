@@ -11,8 +11,9 @@ import users from "./store/reducers/users"
 import messages from "./store/reducers/messages"
 import room from "./store/reducers/room"
 import notifications from './store/reducers/notifications'
+import {IStoreRedux} from './interfaces/IRedux'
 
-const rootReducer = combineReducers({
+const rootReducer = combineReducers<IStoreRedux>({
   user:user,
   users:users,
   messages:messages,
@@ -32,7 +33,6 @@ const logger = (store:any) => {
 };
 
 const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
-
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)));
 
 ReactDOM.render(

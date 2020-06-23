@@ -1,7 +1,12 @@
-export const findUser = (userAll:any,users:any)  => {
+//ChatItem
+export const findUser = (userAll:{
+    email: string,
+    family_name?: string,
+    name?: string,
+    nickname?: string,
+    __v: number,
+    _id: string
+}[],users:string)  => {
     const findUserName = userAll.filter((el:any)=> el.email === users )
-    console.log(findUserName[0]+"9090909090909090909")
     return findUserName.length === 0 ?'': findUserName[0].name
 }
-        
-        

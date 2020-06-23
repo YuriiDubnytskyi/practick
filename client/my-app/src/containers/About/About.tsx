@@ -6,27 +6,55 @@ import {userAuth,getUser} from "../../services/auth.service"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {setUserData,updateUserData,deleteUser} from "../../store/actions/actions";
+import {IUserRedux} from '../../interfaces/IRedux'
 import "./About.css"
 
 interface IAboutProps {
-    auth:any
+    auth:any,
+    userInf:IUserRedux,
+    setUserData:Function,
+    updateUserData:Function,
+    deleteUser:Function
 }
 
-const About: React.FunctionComponent<IAboutProps> = (props:any) => {
+type TshowData = {
+    email: string,
+    family_name: string,
+    name: string,
+    nickname: string,
+    __v?: number,
+    _id?: string,
+    id?: string,
+    status?:number
+}
 
-    const [name,setName] = useState<any>('')
-    const [id,setId] = useState<any>('')
-    const [nickname,setNickname] = useState<any>('')
-    const [family_name,setFamilyName] = useState<any>('')
+type TresUpdateData = {
+    email: string,
+    family_name: string,
+    name: string,
+    nickname: string,
+    __v: number,
+    _id: string,
+    comment?:string,
+    status?:number
+}
+
+const About: React.FunctionComponent<IAboutProps> = (props:IAboutProps) => {
+    const [name,setName] = useState<string>('')
+    const [id,setId] = useState<string|undefined>('')
+    const [nickname,setNickname] = useState<string>('')
+    const [family_name,setFamilyName] = useState<string>('')
     const [update,setUpdate] = useState<boolean>(false)
 
     const history = useHistory()
     useEffect(()=>{
         if(!props.userInf.isAuth){
             props.auth.getProfile((profile:any)=>{
+                
                 const {email,nickname,name,family_name} = profile        
-                userAuth(profile).then((res:any)=> res ? 
-                    getUser(email).then((res:any) => 
+                
+                userAuth(profile).then((res:boolean)=> res ? 
+                    getUser(email).then((res:TshowData) => 
                         res.status!==404 ?
                             showObject(res):
                             createUser({email,nickname,name,family_name})).then(res=>{
@@ -46,7 +74,7 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
         }
     },[])
 
-    const showObject = (obg:any,idd:boolean = false)=>{
+    const showObject = (obg:TshowData,idd:boolean = false)=>{
         let userId
         if(idd){
             setId(obg.id)
@@ -63,19 +91,22 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
         let user = {name:obg.name,email:obg.email,nickname:obg.nickname,family_name:obg.family_name,id:userId}
         props.setUserData(user)
     }
+
     const saveUpdates = () => {
-        updateUser({id,name,nickname,family_name}).then((res:any)=>
+        updateUser({id,name,nickname,family_name}).then((res:TresUpdateData)=>
             res.name ? 
             props.updateUserData({name:res.name,family_name:res.family_name,nickname:res.nickname})
             :console.log('error')
         ).then(()=>setUpdate(false))
-    }    
+    }  
+
     const canselUpdates = () => {
         setName(props.userInf.name)
         setNickname(props.userInf.nickname)
         setFamilyName(props.userInf.family_name)
         setUpdate(false)
     }
+
     const deleteAcount = () =>{
         deleteUserAcount(id)
         .then((status)=>{
@@ -86,9 +117,6 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
         })
     }
     return (
-
-        //Start ---------------
-
         <div>
             <Header auth={props.auth}/>
             <div className='wrapper_about'> 
@@ -108,18 +136,14 @@ const About: React.FunctionComponent<IAboutProps> = (props:any) => {
                     <div className='delete-container'>
                         <p className='sub-title'>Danger Zone</p>
                         <button  className='btn btn--delete' onClick={deleteAcount}>DELETE ACOUNT</button> 
-                    </div>
-                      
+                    </div> 
                 </div>
             </div>
-            
         </div>
-
-        //End -----------
     )
 };
 
-const mapStateToProps = ( state:{user:any} ) => {
+const mapStateToProps = ( state:{user:IUserRedux} ) => {
     return {
         userInf:state.user
     }

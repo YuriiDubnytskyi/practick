@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {create,searchUser,userUpdate,userDelete,getAllUsers} = require('../services/userService.js');
-//validation
+//validation to do
 
 const router = Router();
 
@@ -66,9 +66,5 @@ router.get("/getAll", function(req, res){
         }
     })
 });
-
-
-
-
 
 module.exports = router;
