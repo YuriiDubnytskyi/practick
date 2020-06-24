@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header'
 import {createOrSearchChat} from "../../api/userApi"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {getAllUsers,addRoom} from "../../store/actions/actions";
+import {getAllUsers,addRoom,addInitMess} from "../../store/actions/actions";
 import Users from '../Users/Users'
 import ChatList from '../ChatList/ChatList'
 import { useHistory } from 'react-router-dom';
@@ -14,7 +14,8 @@ interface IMainProps {
   auth:any,
   userInf:IUserRedux,
   getAllUsers:Function,
-  addRoom:Function
+  addRoom:Function,
+  addInitMess:Function
 }
 
 const Main: React.FunctionComponent<IMainProps> = (props:IMainProps) => {
@@ -36,6 +37,7 @@ const Main: React.FunctionComponent<IMainProps> = (props:IMainProps) => {
         }
         createOrSearchChat({id1:data.id1,id2:data.id2}).then((res)=>{
             props.addRoom(res.room)
+            props.addInitMess(res.messages)
             return res
         }).then((res)=>{
             history.push('/chat/'+res.room)
@@ -65,7 +67,8 @@ const mapDispatchToProps = (dispatch:any) => {
         dispatch,
         ...bindActionCreators({
             getAllUsers,
-            addRoom
+            addRoom,
+            addInitMess
         }, dispatch)
     }
 }
