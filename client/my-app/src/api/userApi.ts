@@ -2,12 +2,10 @@ import axios from "axios"
 import {
     TcreateOrSearchChat,
     TcreateUser,
-    TdeleteUserAcount,
-    TgetChatMessages,
-    TgetChatUsers,
-    TisUserExist,
     TupdateMess,
-    TupdateUser
+    TupdateUser,
+    TcreateNotifi,
+    TaddNotifi
 } from './userApiTypes'
 
 export const createUser = (user:TcreateUser) => axios.post("/api/users/create",user).then((res:any) => res)
@@ -31,3 +29,11 @@ export const getChatUsers = (email:string) => axios.get("/api/rooms/getRoomsUser
 export const getChatMessages = (room:string) => axios.get("/api/rooms/getRoomsMessages/"+room).then((res) => res.data[0].messages)
 
 export const updateMess = (messData:TupdateMess) => axios.put("/api/rooms/updateMess",messData).then((res) => res.data)
+
+//export const createNotification = (notifiData:TcreateNotifi) => axios.post("/api/notifications/createNotifications",notifiData).then((res:any) => res)
+
+export const getNotification = (email:string) => axios.get("/api/notifications/getNotification/"+email).then((res) => res.data)
+
+export const addNotificationServer = ({email,room}:TaddNotifi) => axios.post("/api/notifications/addNotification/"+email+"/"+room).then((res) => res)
+
+export const deleteNotificationServer = ({email,room}:TaddNotifi) => axios.delete("/api/notifications/deleteNotification/"+email+"/"+room).then((res) => res)

@@ -15,7 +15,7 @@ const message = (state:INotificationRedux = initialState,action:any)=>{
     switch (action.type){
         case actionTypes.INIT_NOTIFICATION:
             return updateObject(state,{
-                notifications:[action.initData]
+                notifications:[...action.initData]
             })
         case actionTypes.ADD_NOTIFICATION:
             return updateObject(state,{

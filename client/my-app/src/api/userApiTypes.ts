@@ -5,9 +5,6 @@ export type TcreateUser = {
     family_name:string
 }
 
-export type TisUserExist = {
-    email:string
-} 
 
 export type TupdateUser = {
     id?:string,
@@ -16,27 +13,25 @@ export type TupdateUser = {
     family_name:string
 }
 
-export type TdeleteUserAcount = {
-    id:string
-}
-
 export type TcreateOrSearchChat = {
     id1:string,
     id2:string
 }
 
-export type TgetChatUsers = {
-    email:string
-}
-
-export type TgetChatMessages = {
-    room:string
-}
-
 export type TupdateMess = {
     room:string,
     mess:{
-        name:string,
+        email:string,
         mess:string
     }[]
+}
+
+export type TcreateNotifi = {
+    email:string,
+    room:string
+}
+
+export type TaddNotifi = {
+    email:string,
+    room:string
 }

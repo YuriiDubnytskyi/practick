@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import {getChatUsers,getChatMessages} from "../../api/userApi"
+import {getChatUsers,getChatMessages,getNotification,addNotificationServer} from "../../api/userApi"
 import ChatItem from '../../components/ChatItem/ChatItem'
 import socketIOClient from 'socket.io-client'
 import {connect} from "react-redux";
@@ -33,12 +33,15 @@ const ChatList: React.FunctionComponent<IChatListProps> = (props:IChatListProps)
     useEffect(()=>{
         getChatUsers(props.email).then(res=>{
             setData(res)
-            const dat:any={}
+            //const dat:any={}
             res.forEach((el:any)=>{
                 connectToServer(socket,props.email,el.room)
-                dat[el.room]=0
+                //dat[el.room]=0
             })
-            props.initNotification(dat)
+            //props.initNotification(dat)
+        })
+        getNotification(props.email).then(res=>{
+            props.initNotification(res)
         })
     },[])
     
@@ -51,6 +54,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = (props:IChatListProps)
                     props.addMess({mess:data.message,name:data.name})
                 }
             }else{
+                addNotificationServer({email:props.email,room:data.room})
                 props.addNotification(data.room)
                 alert("You have SMS from"+data.name)
             }

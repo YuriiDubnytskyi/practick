@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {addMess, removeMess,addNotification} from "../../store/actions/actions";
 import { useHistory } from 'react-router-dom';
-import {updateMess} from "../../api/userApi"
+import {updateMess,deleteNotificationServer} from "../../api/userApi"
 import {connectToServer} from '../../services/socket.service'
 import {IUserRedux,IUsersRedux,IRoomRedux,IMessagesRedux} from '../../interfaces/IRedux'
 import './Chat.css'
@@ -22,7 +22,7 @@ interface IChatProps {
     }[]|[],
     mess:({
         mess:string,
-        name:string
+        email:string
     })[],
     roomChat:string,
     addMess:Function,removeMess:Function,addNotification:Function
@@ -32,16 +32,17 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
     //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
     const [endpoint] = useState<string>(`localhost:5000`)
     const [mess,setMess] = useState<string>('')
+    const [newMess,setNewMess] = useState<number>(0)
     const [chatUser,setUserChat] = useState<string|undefined>('')
     let history = useHistory();
     const socket = socketIOClient(endpoint);
 
     const sendMsg =()=>{
         const socket = socketIOClient(endpoint);
-        props.addMess({mess,name:props.userInf.name})
+        props.addMess({mess,email:props.userInf.email})
         socket.emit('send-chat-message', props.roomChat, mess, props.userInf.email, props.userInf.name)
         let data = props.mess
-        data.push({mess,name:props.userInf.name})
+        data.push({mess,email:props.userInf.email})
         updateMess({room:props.roomChat,mess:data})
         setMess('')
     }
@@ -59,6 +60,7 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
             const userEmail =props.roomChat.replace(props.userInf.email,'')
             const userE = props.userAll.filter((el:any)=>el.email===userEmail) 
             setUserChat(userE[0].name)
+            deleteNotificationServer({email:props.userInf.email,room:props.roomChat})
         }
     },[])
     
@@ -101,7 +103,7 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
                 <p className='title-room'>{chatUser}---{props.userInf.name}</p>
                 <div className='chat-mess'>
                     {props.mess.map((el:any)=>{ 
-                        if(el.name === props.userInf.name){
+                        if(el.email === props.userInf.email){
                             return <p className='right-mess'>{el.mess}</p> 
                         }else{
                             return <p className='left-mess'>{el.mess}</p> 

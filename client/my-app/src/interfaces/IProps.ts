@@ -25,7 +25,7 @@ export interface IChatItemProps {
         __v: number,
         _id: string
     }[]|[],
-    notification:{
+    notification:({
         [key:string]:number
-    }[]|[]
+    })[]
 }

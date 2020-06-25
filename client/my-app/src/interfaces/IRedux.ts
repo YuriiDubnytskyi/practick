@@ -27,7 +27,7 @@ export interface IUsersRedux {
 export interface IMessagesRedux {
     messages:{
         mess:string,
-        name:string
+        email:string
     }[]|[]
 }
 export interface IRoomRedux {

@@ -8,6 +8,7 @@ var http = require('http')
 var socketIO = require('socket.io');
 const server = http.createServer(app)
 const io = socketIO(server)
+const {addNotifications} = require('./services/notificationsService.js');
 
 mongoose.connect('mongodb+srv://yuriy:Wdj_7yex6cE5cjp@cluster0-odkqs.mongodb.net/test?retryWrites=true&w=majority',
 {useNewUrlParser:true,useUnifiedTopology: true})
@@ -22,10 +23,23 @@ app.use('/', express.static('./client/my-app/build'));
 
 io.on('connection', socket => {
   socket.on('new-user', (room, name) => {
+    console.log("Join-"+room)
     socket.join(room)
   })
   socket.on('send-chat-message', (room, message,email,name) => {
-    socket.to(room).broadcast.emit('chat-message', { message: message,email,name,room})
+    const roomList = io.sockets.adapter.rooms[room];
+    if(roomList.length === 1){
+        const userEmail = room.replace(email,'')
+        addNotifications(userEmail,room)
+    }else{
+      console.log(name+"-"+JSON.stringify(roomList))
+      socket.to(room).broadcast.emit('chat-message', { message: message,email,name,room})
+    }
+    
+  })
+  socket.on('leave-room',(room)=>{
+    console.log("leave-"+room)
+    socket.leave(room)
   })
  
 })

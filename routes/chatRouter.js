@@ -4,7 +4,6 @@ const {searchRoom,getRoomUsers,updateMess,getRoomMessages} = require('../service
 const router = Router();
 
 router.get('/getRoom/:id1/:id2', (req, res) => {
-    console.log(req.params)
     const id1 = req.params.id1;
     const id2 = req.params.id2
     const result =  searchRoom(id1,id2).then((r)=>{
@@ -17,7 +16,6 @@ router.get('/getRoom/:id1/:id2', (req, res) => {
 })
 
 router.get('/getRoomsUsers/:room', (req, res) => {
-    console.log(req.params)
     const room = req.params.room
     const result =  getRoomUsers(room).then((r)=>{
         if (r) {
@@ -29,7 +27,6 @@ router.get('/getRoomsUsers/:room', (req, res) => {
 })
 
 router.get('/getRoomsMessages/:email', (req, res) => {
-    console.log(req.params)
     const email = req.params.email
     const result =  getRoomMessages(email).then((r)=>{
         if (r) {

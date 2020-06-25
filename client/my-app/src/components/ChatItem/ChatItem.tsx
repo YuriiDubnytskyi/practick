@@ -20,6 +20,7 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:IChatItemProps)
         }else{
             setUsers(props.data.users[0])
         }
+        console.log(room+"-----room")
     },[])
 
     return (
@@ -28,7 +29,12 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:IChatItemProps)
                <p className='chat-user'>
                     {findUser(props.userAll,users)}
                 </p>
-                <p className='chat-nitification'>{props.notification.length === 0? <></>:<>{props.notification[0][room]}</>}
+                <p className='chat-nitification'>{<>{props.notification.map((el:any)=>{
+                    console.log(el.room)
+                    if(el.room == props.data.room){
+                        return <>{el.notifications}</>
+                    }
+                })}</>}
                 </p> 
             </div>
             <button className='btn--startchat' onClick={()=>props.chatGo(room,message)}>Go Chat</button>  
