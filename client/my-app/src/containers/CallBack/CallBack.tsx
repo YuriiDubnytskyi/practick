@@ -1,6 +1,7 @@
 import React,{FC , useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
-import './CallBack.css'
+import Spinner from '../../components/Spinner/Spinner'
+
 interface ICallBackProps {
     auth:any,
     location:any
@@ -22,14 +23,7 @@ const CallBack:FC<ICallBackProps> = (props) => {
           }
     },[])
     return (
-        <div className='wrapper-loading'>
-            <div className="fancy-spinner">
-                <div className="ring"></div>
-                <div className="ring"></div>
-                <div className="dot"></div>
-            </div>
-        </div>
-        
+        <Spinner/>
   )
 };
 

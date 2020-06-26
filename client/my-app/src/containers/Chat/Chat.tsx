@@ -4,10 +4,10 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {addMess, removeMess,addNotification} from "../../store/actions/actions";
 import { useHistory } from 'react-router-dom';
-import {updateMess,deleteNotificationServer} from "../../api/userApi"
+import {updateMess,deleteNotificationServer,addNotificationServer} from "../../api/userApi"
 import {connectToServer} from '../../services/socket.service'
 import {IUserRedux,IUsersRedux,IRoomRedux,IMessagesRedux} from '../../interfaces/IRedux'
-import './Chat.css'
+import ChatInfo from '../../components/ChatInfo/ChatInfo'
 
 interface IChatProps {
     auth:any,
@@ -32,7 +32,6 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
     //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
     const [endpoint] = useState<string>(`localhost:5000`)
     const [mess,setMess] = useState<string>('')
-    const [newMess,setNewMess] = useState<number>(0)
     const [chatUser,setUserChat] = useState<string|undefined>('')
     let history = useHistory();
     const socket = socketIOClient(endpoint);
@@ -72,6 +71,7 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
                     props.addMess({mess:data.message,name:data.name})
                 }
             }else{
+                addNotificationServer({email:props.userInf.email,room:data.room})
                 props.addNotification(data.room)
                 alert("You have SMS from"+data.name)
             }
@@ -90,34 +90,18 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
     }
 
     return (
-        <div className=''>
-            <header className='header-chat'>
-                <div className="logo1"><p className="logo__text1">WebChat</p></div>
-                <p className='header-p'>
-                    <button className='header-btn' onClick={leaveRoom}>EXIT CHAT</button>
-                </p>
-                <div className="logo2"><p className="logo__text2">WebChat</p></div>
-            </header>  
-            
-            <div className='wrapper2'>
-                <p className='title-room'>{chatUser}---{props.userInf.name}</p>
-                <div className='chat-mess'>
-                    {props.mess.map((el:any)=>{ 
-                        if(el.email === props.userInf.email){
-                            return <p className='right-mess'>{el.mess}</p> 
-                        }else{
-                            return <p className='left-mess'>{el.mess}</p> 
-                        }   
-                    })}
-                </div>
-                <div className='send-mess'>
-                    <textarea rows={3} className='send-mess_input' value={mess} onChange={(e:any)=>setMess(e.target.value)} onKeyPress={keyPressed}></textarea>
-                    <button className='send-mess_btn' onClick={sendMsg}>Send</button>
-                </div>
-            </div>
-        </div>
+        <ChatInfo
+            leaveRoom = {leaveRoom}
+            chatUser = {chatUser}
+            name = {props.userInf.name}
+            mess = {props.mess}
+            email = {props.userInf.email}
+            message = {mess}
+            setMess = {setMess}
+            keyPressed = {keyPressed}
+            sendMsg = {sendMsg}
+        />
     )
-
 };
 
 

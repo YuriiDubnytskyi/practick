@@ -6,9 +6,12 @@ const initialState:INotificationRedux = {
     notifications:[]
 };
 
-const addNotification = (state:any,addData:any) => {
-    state[0][addData] = state[0][addData] + 1
-    return state 
+const addNotification = (state:any,addData:any) => { 
+    return state.map((el:any)=>{
+        if(el.room === addData){
+            el.notifications += 1
+        }
+    }) 
 }
 
 const message = (state:INotificationRedux = initialState,action:any)=>{

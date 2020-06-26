@@ -1,13 +1,14 @@
 import React,{useEffect,useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header/Header'
+import AboutInfo from '../../components/AboutInfo/AboutInfo'
 import {createUser,updateUser,deleteUserAcount} from "../../api/userApi"
 import {userAuth,getUser} from "../../services/auth.service"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {setUserData,updateUserData,deleteUser} from "../../store/actions/actions";
 import {IUserRedux} from '../../interfaces/IRedux'
-import "./About.css"
+
 
 interface IAboutProps {
     auth:any,
@@ -119,26 +120,19 @@ const About: React.FunctionComponent<IAboutProps> = (props:IAboutProps) => {
     return (
         <div>
             <Header auth={props.auth}/>
-            <div className='wrapper_about'> 
-                <div className='about-container'>
-                    <div>
-                        <p className='title'>Your Account</p>
-                        <p className='user-value'>Name -- {name}</p>
-                        {update ? <input className='user-value_input' value={name} name="name" onChange={(e:any)=> setName(e.target.value)}/>:<></>}
-                        <p className='user-value'>Surname -- {family_name}</p>
-                        {update ? <input className='user-value_input' value={family_name} name="family_name" onChange={(e:any)=> setFamilyName(e.target.value)}/>:<></>}
-                        <p className='user-value'>Nickname -- {nickname} users can find you</p>
-                        {update ? <input className='user-value_input' value={nickname} name="nickname" onChange={(e:any)=> setNickname(e.target.value)}/>:<></>}
-                        { update ? <><br/><button className='btn btn--save' onClick={saveUpdates}>Save</button>
-                                <button className='btn btn--cansel' onClick={canselUpdates}>Cancel</button></>
-                            : <button className='btn btn--update' onClick={()=> setUpdate(true)}>Update</button> }
-                    </div>
-                    <div className='delete-container'>
-                        <p className='sub-title'>Danger Zone</p>
-                        <button  className='btn btn--delete' onClick={deleteAcount}>DELETE ACOUNT</button> 
-                    </div> 
-                </div>
-            </div>
+            <AboutInfo
+                update = {update}
+                family_name = {family_name}
+                name = {name}
+                nickname = {nickname}
+                setName = {setName}
+                setFamilyName = {setFamilyName}
+                setNickname = {setNickname}
+                saveUpdates = {saveUpdates}
+                setUpdate = {setUpdate}
+                canselUpdates = {canselUpdates}
+                deleteAcount = {deleteAcount}
+            />
         </div>
     )
 };
