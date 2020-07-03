@@ -10,7 +10,7 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
-
+importScripts("https://js.pusher.com/beams/service-worker.js");
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
