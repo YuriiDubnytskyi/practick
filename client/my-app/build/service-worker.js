@@ -14,7 +14,7 @@ importScripts("https://js.pusher.com/beams/service-worker.js");
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.14c9976a027005912877bbe3c5793334.js"
+  "/precache-manifest.a9564fe2ada379dd41a0532c838160ff.js"
 );
 
 self.addEventListener('message', (event) => {
