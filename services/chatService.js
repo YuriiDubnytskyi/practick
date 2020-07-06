@@ -1,4 +1,5 @@
 const chatSchema = require("../models/chatroom")
+const {createNotifications} = require('../services/notificationsService')
 
 const searchRoom = async (id1,id2) => {
     let promise = new Promise((res,rej)=>{
@@ -10,6 +11,8 @@ const searchRoom = async (id1,id2) => {
                     if(err) return console.log(err);
                     if(room === null){
                         const room = new chatSchema({room:`${id2}${id1}`,users:[id2,id1],messages:[]})
+                        createNotifications({email:id1,room:`${id2}${id1}`,notifications:0})
+                        createNotifications({email:id2,room:`${id2}${id1}`,notifications:0})
                         room.save(function(err,room){
                             if(err) return console.log(err);
                             res(room)

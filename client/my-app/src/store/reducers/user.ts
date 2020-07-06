@@ -1,16 +1,18 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
+import { IUserRedux } from '../../interfaces/IRedux';
 
-const initialState:any = {
-    id:0,
+const initialState:IUserRedux = {
+    id:'',
     name:'',
     email:'',
     nickname:'',
     family_name:'',
+    id_notifications:'',
     isAuth:false
 };
 
-const user = (state:any = initialState,action:any)=>{
+const user = (state:IUserRedux = initialState,action:any)=>{
     switch (action.type){
         case actionTypes.SET_USER_DATA:
             return updateObject(state,{
@@ -19,6 +21,7 @@ const user = (state:any = initialState,action:any)=>{
                 email:action.data.email,
                 nickname:action.data.nickname,
                 family_name:action.data.family_name,
+                id_notifications:action.data.id_notifications,
                 isAuth:true
             })
         case actionTypes.UPDATE_USER_DATA:

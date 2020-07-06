@@ -2,22 +2,16 @@ import React,{useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {addRoom,addInitMess} from "../../store/actions/actions";
-import { useHistory } from 'react-router-dom';
-import {getChatMessages} from '../../api/userApi'
 import {findUser} from '../../services/users.service'
+import {INotificationRedux,IUserRedux,IUsersRedux} from '../../interfaces/IRedux'
+import {IChatItemProps} from '../../interfaces/IProps'
 import './ChatItem.css'
 
-
-interface IChatItemProps {
-    data:any
-}
-
-const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
-    const [message,setMess] = useState<any>([])
-    const [users,setUsers] = useState<any>('')
-    const [room,setRoom] = useState<any>('')
-    let history = useHistory();
-
+const ChatItem: React.FunctionComponent<IChatItemProps> = (props:IChatItemProps) => {
+    const [message,setMess] = useState<{mess:string,name:string}[]>([])
+    const [users,setUsers] = useState<string>('')
+    const [room,setRoom] = useState<string>('')
+    
     useEffect(()=>{
         setRoom(props.data.room)
         setMess(props.data.messages)
@@ -26,48 +20,36 @@ const ChatItem: React.FunctionComponent<IChatItemProps> = (props:any) => {
         }else{
             setUsers(props.data.users[0])
         }
+        console.log(room+"-----room")
     },[])
 
-    const chatGo = () => {
-        if(props.notification[0][room] !== 0){
-            getChatMessages(room).then((mes)=>{
-
-                props.addInitMess(mes)        
-            })
-        }else{
-            props.addInitMess(message)
-        }
-       
-        props.addRoom(room)
-        history.push('/chat/'+room)
-    }
     return (
-        //Start Style ------------
         <div className='chat-item-container'>
             <div className='chat-info'>
                <p className='chat-user'>
                     {findUser(props.userAll,users)}
                 </p>
-                <p className='chat-nitification'>{props.notification.length === 0? <></>:<>{props.notification[0][room]}</>}
+                <p className='chat-nitification'>{<>{props.notification.map((el:any)=>{
+                    console.log(el.room)
+                    if(el.room == props.data.room){
+                        return <>{el.notifications}</>
+                    }
+                })}</>}
                 </p> 
             </div>
-            
-            <button className='btn--startchat' onClick={chatGo}>Go Chat</button>
-            
-            
+            <button className='btn--startchat' onClick={()=>props.chatGo(room,message)}>Go Chat</button>  
         </div>
-        //End -------------
     )
 };
 
-const mapStateToProps = ( state:{user:any,users:any,messages:any,notifications:any} ) => {
+const mapStateToProps = ( state:{user:IUserRedux,users:IUsersRedux,notifications:INotificationRedux} ) => {
     return {
         userInf:state.user,
         userAll:state.users.users,
-        mess:state.messages.messages,
         notification:state.notifications.notifications
     }
 };
+
 const mapDispatchToProps = (dispatch:any) => {
     return {
         dispatch,

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {create,searchUser,userUpdate,userDelete,getAllUsers} = require('../services/userService.js');
-//validation
+//validation to do
 
 const router = Router();
 
@@ -9,7 +9,8 @@ router.post('/create', (req, res) => {
         email:req.body.email,
         nickname:req.body.nickname,
         name:req.body.name,
-        family_name:req.body.family_name
+        family_name:req.body.family_name,
+        id_notifications:req.body.id_notifications
     }
     const result =  create(user).then((r)=>{
         if (r) {
@@ -66,9 +67,5 @@ router.get("/getAll", function(req, res){
         }
     })
 });
-
-
-
-
 
 module.exports = router;

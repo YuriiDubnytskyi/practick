@@ -5,14 +5,33 @@ import {bindActionCreators} from "redux";
 import {getAllUsers} from "../../store/actions/actions";
 import UserItem from '../../components/UserItem/UserItem'
 import "./Users.css"
+import {IUserRedux} from '../../interfaces/IRedux'
 
 interface IUsersProps {
-  startChat:any
+  startChat:Function,
+  userInf:IUserRedux,
+  getAllUsers:Function
 }
 
-const Users: React.FunctionComponent<IUsersProps> = (props:any) => {
-    const [inetialUsers, setInitial] = useState<any>([])
-    const [filterUsers, setFilterUsers] = useState<any>([])
+const Users: React.FunctionComponent<IUsersProps> = (props:IUsersProps) => {
+    const [inetialUsers, setInitial] = useState<{
+        email: string,
+        family_name: string,
+        name: string,
+        nickname: string,
+        __v: number,
+        id_notifications:string,
+        _id: string
+    }[]>([])
+    const [filterUsers, setFilterUsers] = useState<{
+        email: string,
+        family_name: string,
+        name: string,
+        nickname: string,
+        __v: number,
+        id_notifications:string,
+        _id: string
+    }[]>([])
     
     useEffect(()=>{
         getUsers()
@@ -23,7 +42,15 @@ const Users: React.FunctionComponent<IUsersProps> = (props:any) => {
     },[])
     
     const filterUsersInput = (event:any) =>{
-        const updatedList = inetialUsers.filter(function(item:any){
+        const updatedList = inetialUsers.filter((item:{
+            email: string,
+            family_name: string,
+            name: string,
+            nickname: string,
+            __v: number,
+            id_notifications:string,
+            _id: string
+        })=>{
           return item.nickname.toLowerCase().search(
             event.target.value.toLowerCase()) !== -1;
         });
@@ -35,7 +62,6 @@ const Users: React.FunctionComponent<IUsersProps> = (props:any) => {
     }
 
     return (
-        //Start -----------
         <div className='users-container'>
             <div className='search-users'>
                 <input className='' placeholder="Search user" onChange={filterUsersInput}/>
@@ -43,11 +69,10 @@ const Users: React.FunctionComponent<IUsersProps> = (props:any) => {
             <div className='line'></div>
             {filterUsers.map((el:any)=>{return <UserItem nickname={el.nickname} startChat={props.startChat} email={el.email}/>})}
         </div>
-        //End----------------
     )
 };
 
-const mapStateToProps = ( state:{user:any} ) => {
+const mapStateToProps = ( state:{user:IUserRedux} ) => {
     return {
         userInf:state.user
     }

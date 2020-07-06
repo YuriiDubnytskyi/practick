@@ -1,23 +1,28 @@
-import React,{useState, useEffect} from 'react';
+import React,{ useEffect} from 'react';
 import Header from '../../components/Header/Header'
 import {createOrSearchChat} from "../../api/userApi"
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {getAllUsers,addRoom} from "../../store/actions/actions";
+import {getAllUsers,addRoom,addInitMess} from "../../store/actions/actions";
 import Users from '../Users/Users'
 import ChatList from '../ChatList/ChatList'
 import { useHistory } from 'react-router-dom';
 import './Main.css'
+import {IUserRedux} from '../../interfaces/IRedux'
 
 interface IMainProps {
-  auth:any
+  auth:any,
+  userInf:IUserRedux,
+  getAllUsers:Function,
+  addRoom:Function,
+  addInitMess:Function
 }
 
-const Main: React.FunctionComponent<IMainProps> = (props:any) => {
+const Main: React.FunctionComponent<IMainProps> = (props:IMainProps) => {
     let history = useHistory();
     useEffect(()=>{
         if(props.userInf.name===''){
-            for (let [key, value] of Object.entries(localStorage)) {
+            for (let [key] of Object.entries(localStorage)) {
                 if(key !== "access_token" && key !== "id_token" && key !== "expires_at" && key !== "scopes"){
                     localStorage.setItem(key,'false')
                 }
@@ -25,13 +30,14 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
             history.push('/about')
         }
     },[])
-    const startChat = (nickname:any) =>{
+    const startChat = (nickname:string) =>{
         const data ={
             id1:nickname,
             id2:props.userInf.email
         }
-        createOrSearchChat(data.id1,data.id2).then((res)=>{
+        createOrSearchChat({id1:data.id1,id2:data.id2}).then((res)=>{
             props.addRoom(res.room)
+            props.addInitMess(res.messages)
             return res
         }).then((res)=>{
             history.push('/chat/'+res.room)
@@ -39,7 +45,6 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
     }
     
     return (
-        //Start --------------
         <div className=''>
             <Header auth={props.auth}/>
             <div className='wrapper1'>
@@ -49,11 +54,10 @@ const Main: React.FunctionComponent<IMainProps> = (props:any) => {
                 </div>
             </div>
         </div>
-        //End ---------------
     )
 };
 
-const mapStateToProps = ( state:{user:any} ) => {
+const mapStateToProps = ( state:{user:IUserRedux} ) => {
     return {
         userInf:state.user
     }
@@ -63,11 +67,11 @@ const mapDispatchToProps = (dispatch:any) => {
         dispatch,
         ...bindActionCreators({
             getAllUsers,
-            addRoom
+            addRoom,
+            addInitMess
         }, dispatch)
     }
 }
 
 
 export default connect(mapStateToProps,mapDispatchToProps)(Main);
-// export default Main

@@ -1,12 +1,25 @@
-import * as React from 'react';
+import  React,{useEffect} from 'react';
 import './SingInLogIn.css'
+
 interface ISingInLogInProps {
     auth:any
 }
+declare global {
+    interface Window { OneSignal: any; }
+}
 
 const SingInLogIn: React.FunctionComponent<ISingInLogInProps> = (props) => {
+    useEffect(()=>{
+        window.OneSignal = window.OneSignal || [];
+        window.OneSignal.push(function() {
+          window.OneSignal.init({
+            appId: "890ecd33-a1e8-443b-8489-0d76bfdd453a",
+          });
+        });
+        
+       
+    },[])
     return (
-        //Start ------------
         <>
             <div className="wrapper">
                 <div className="main-content">
@@ -42,8 +55,6 @@ const SingInLogIn: React.FunctionComponent<ISingInLogInProps> = (props) => {
                 </ul>
             </div>
         </>
-        
-        //End------------
     )
 };
 

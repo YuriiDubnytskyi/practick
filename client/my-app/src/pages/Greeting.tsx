@@ -1,6 +1,6 @@
 import  React ,{FC} from 'react';
 import {Route,Switch, Redirect} from 'react-router-dom';
-import SingInLogIn from "../containers/SingInLogIn/SingInLogIn"
+import SingInLogIn from "../components/SingInLogIn/SingInLogIn"
 import CallBack from "../containers/CallBack/CallBack"
 
 interface IGreetingProps {

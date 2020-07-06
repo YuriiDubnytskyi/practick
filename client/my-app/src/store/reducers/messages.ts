@@ -1,11 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
+import {IMessagesRedux} from '../../interfaces/IRedux'
 
-const initialState:any = {
+const initialState:IMessagesRedux = {
     messages:[]
 };
 
-const message = (state:any = initialState,action:any)=>{
+const message = (state:IMessagesRedux = initialState,action:any)=>{
     switch (action.type){
         case actionTypes.ADD_MESS:
             return updateObject(state,{
