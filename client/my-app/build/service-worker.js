@@ -10,11 +10,11 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
-importScripts("https://js.pusher.com/beams/service-worker.js");
+
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a9564fe2ada379dd41a0532c838160ff.js"
+  "/precache-manifest.f12f8fcb08205d583ea20f372b034ce6.js"
 );
 
 self.addEventListener('message', (event) => {
