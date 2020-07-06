@@ -1,8 +1,12 @@
 const express = require('express');
+
+const path = require('path');
 const cors = require('cors');
 const routes = require('./routes/index')
 const mongoose = require('mongoose');
-const port = 5000
+
+const port = process.env.PORT || 5000;
+
 const app = express();
 var http = require('http')
 var socketIO = require('socket.io');
@@ -20,7 +24,11 @@ app.use(cors())
 app.use(express.json());
 routes(app)
 
-app.use('/', express.static('./client/my-app/build'));
+app.use(express.static(path.join(__dirname, 'client/my-app/build')));
+//app.use('/', express.static('./client/my-app/build'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/my-app/build/index.html'));
+});
 
 io.on('connection', socket => {
   socket.on('new-user', (room, name) => {
@@ -51,4 +59,8 @@ io.on('connection', socket => {
  
 })
 
+
 server.listen(port, () => console.log(`Listening on port ${port}`))
+// app.listen(5000 ,function () {
+//   console.log('Example app listening on port 5000!');
+// });
