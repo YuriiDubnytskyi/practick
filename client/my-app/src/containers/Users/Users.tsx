@@ -20,6 +20,7 @@ const Users: React.FunctionComponent<IUsersProps> = (props:IUsersProps) => {
         name: string,
         nickname: string,
         __v: number,
+        id_notifications:string,
         _id: string
     }[]>([])
     const [filterUsers, setFilterUsers] = useState<{
@@ -28,6 +29,7 @@ const Users: React.FunctionComponent<IUsersProps> = (props:IUsersProps) => {
         name: string,
         nickname: string,
         __v: number,
+        id_notifications:string,
         _id: string
     }[]>([])
     
@@ -46,6 +48,7 @@ const Users: React.FunctionComponent<IUsersProps> = (props:IUsersProps) => {
             name: string,
             nickname: string,
             __v: number,
+            id_notifications:string,
             _id: string
         })=>{
           return item.nickname.toLowerCase().search(

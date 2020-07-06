@@ -9,7 +9,8 @@ router.post('/create', (req, res) => {
         email:req.body.email,
         nickname:req.body.nickname,
         name:req.body.name,
-        family_name:req.body.family_name
+        family_name:req.body.family_name,
+        id_notifications:req.body.id_notifications
     }
     const result =  create(user).then((r)=>{
         if (r) {

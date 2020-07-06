@@ -15,6 +15,7 @@ export interface IChatItemProps {
         email:string,
         nickname?:string,
         family_name?:string,
+        id_notifications:string,
         isAuth:boolean
     },
     userAll:{
@@ -22,6 +23,7 @@ export interface IChatItemProps {
         family_name?: string,
         name?: string,
         nickname?: string,
+        id_notifications:string,
         __v: number,
         _id: string
     }[]|[],
