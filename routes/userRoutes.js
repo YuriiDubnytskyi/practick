@@ -12,6 +12,7 @@ router.post('/create', (req, res) => {
         family_name:req.body.family_name,
         id_notifications:req.body.id_notifications
     }
+    console.log(req.body)
     const result =  create(user).then((r)=>{
         if (r) {
             res.json(r);
