@@ -2,8 +2,8 @@ export type TcreateUser = {
     email:string,
     nickname:string,
     name:string,
-    family_name:string,
-    id_notifications:string
+    family_name:string
+    
 }
 
 

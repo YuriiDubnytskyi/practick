@@ -5,8 +5,7 @@ const userSchema = new Schema({
     email:String,
     nickname:String,
     name:String,
-    family_name:String,
-    id_notifications:String
+    family_name:String
 },{
     collection:"userPractice"
 })
