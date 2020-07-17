@@ -25,8 +25,8 @@ interface IChatListProps {
 
 const ChatList: React.FunctionComponent<IChatListProps> = (props:IChatListProps) => {
     const [data,setData] = useState<any>([])
-    //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    const [endpoint] = useState(`localhost:5000`)
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    //const [endpoint] = useState(`localhost:5000`)
     const socket = socketIOClient(endpoint);
     let history = useHistory();
 
@@ -51,7 +51,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = (props:IChatListProps)
             console.log("herelocation"+window.location)
             if(window.location.pathname === '/chat/'+data.room){
                 if(data.email !== props.email){
-                    props.addMess({mess:data.message,name:data.name})
+                    props.addMess({mess:data.message,email:data.email})
                 }
             }else{
                 addNotificationServer({email:props.email,room:data.room})

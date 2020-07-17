@@ -12,8 +12,7 @@ export interface IUserRedux {
     email:string,
     nickname:string,
     family_name:string,
-    isAuth:boolean,
-    id_notifications:string
+    isAuth:boolean
 }
 export interface IUsersRedux {
     users:{
@@ -21,7 +20,6 @@ export interface IUsersRedux {
         family_name?: string,
         name?: string,
         nickname?: string,
-        id_notifications:string,
         __v: number,
         _id: string
     }[]|[]

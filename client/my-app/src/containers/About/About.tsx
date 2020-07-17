@@ -53,30 +53,32 @@ const About: React.FunctionComponent<IAboutProps> = (props:IAboutProps) => {
             props.auth.getProfile((profile:any)=>{
                 
                 const {email,nickname,name,family_name} = profile        
-                const id_notifications = window.OneSignal.getUserId()
-                userAuth(profile).then((res:boolean)=> res ? 
+                   userAuth(profile).then((res:boolean)=> res ? 
                     getUser(email).then((res:TshowData) => 
                         res.status!==404 ?
-                            showObject(res,id_notifications):
-                            createUser({email,nickname,name,family_name,id_notifications})).then(res=>{
+                            showObject(res):
+                            createUser({email,nickname,name,family_name})).then(res=>{
                                 if(res === undefined){
                                     console.log("error")
                                 }else{
-                                    showObject(res.data,id_notifications)
+                                    showObject(res.data)
                                 }
                             })
                 
                 
-                : history.push('/verified'))
+                : history.push('/verified')) 
+                
+                
     
             })
         }else{
-            const id_notifications = window.OneSignal.getUserId()
-            showObject(props.userInf,id_notifications,true)
+            
+            showObject(props.userInf,true) 
+        
         }
     },[])
 
-    const showObject = (obg:TshowData,id_notifications:string,idd:boolean = false)=>{
+    const showObject = (obg:TshowData,idd:boolean = false)=>{
         let userId
         if(idd){
             setId(obg.id)
@@ -90,7 +92,7 @@ const About: React.FunctionComponent<IAboutProps> = (props:IAboutProps) => {
         setNickname(obg.nickname)
         setFamilyName(obg.family_name)
       
-        let user = {name:obg.name,email:obg.email,nickname:obg.nickname,family_name:obg.family_name,id:userId,id_notifications}
+        let user = {name:obg.name,email:obg.email,nickname:obg.nickname,family_name:obg.family_name,id:userId}
         props.setUserData(user)
     }
 

@@ -17,7 +17,6 @@ interface IChatProps {
         family_name?: string,
         name?: string,
         nickname?: string,
-        id_notifications:string,
         __v: number,
         _id: string
     }[]|[],
@@ -30,8 +29,8 @@ interface IChatProps {
 }
 
 const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
-    //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    const [endpoint] = useState<string>(`localhost:5000`)
+    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    //const [endpoint] = useState<string>(`localhost:5000`)
     const [mess,setMess] = useState<string>('')
     const [chatUser,setUserChat] = useState<string|undefined>('')
     let history = useHistory();
@@ -40,7 +39,7 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
     const sendMsg =()=>{
         const socket = socketIOClient(endpoint);
         props.addMess({mess,email:props.userInf.email})
-        socket.emit('send-chat-message', props.roomChat, mess, props.userInf.email, props.userInf.name,props.userInf.id_notifications)
+        socket.emit('send-chat-message', props.roomChat, mess, props.userInf.email, props.userInf.name)
         let data = props.mess
         data.push({mess,email:props.userInf.email})
         updateMess({room:props.roomChat,mess:data})
@@ -69,7 +68,7 @@ const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
         socket.on('chat-message', (data:any) => {
             if(window.location.pathname === '/chat/'+data.room){
                 if(data.email !== props.userInf.email){
-                    props.addMess({mess:data.message,name:data.name})
+                    props.addMess({mess:data.message,email:data.email})
                 }
             }else{
                 addNotificationServer({email:props.userInf.email,room:data.room})

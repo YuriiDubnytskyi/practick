@@ -8,7 +8,6 @@ const initialState:IUserRedux = {
     email:'',
     nickname:'',
     family_name:'',
-    id_notifications:'',
     isAuth:false
 };
 
@@ -21,7 +20,6 @@ const user = (state:IUserRedux = initialState,action:any)=>{
                 email:action.data.email,
                 nickname:action.data.nickname,
                 family_name:action.data.family_name,
-                id_notifications:action.data.id_notifications,
                 isAuth:true
             })
         case actionTypes.UPDATE_USER_DATA:
