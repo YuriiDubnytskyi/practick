@@ -1,12 +1,13 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useCallback} from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header/Header'
 import AboutInfo from '../../components/AboutInfo/AboutInfo'
-import {createUser,updateUser,deleteUserAcount} from "../../api/userApi"
+import {updateUser,deleteUserAcount} from "../../api/userApi"
 import {userAuth,getUser} from "../../services/auth.service"
+import {filterUserData} from '../../services/users.service'
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {setUserData,updateUserData,deleteUser} from "../../store/actions/actions";
+import {setUser,setUserData,updateUserData,deleteUser,userCreate} from "../../store/actions/actions";
 import {IUserRedux} from '../../interfaces/IRedux'
 
 
@@ -15,7 +16,9 @@ interface IAboutProps {
     userInf:IUserRedux,
     setUserData:Function,
     updateUserData:Function,
-    deleteUser:Function
+    deleteUser:Function,
+    userCreate:Function,
+    setUser:Function
 }
 
 type TshowData = {
@@ -46,58 +49,36 @@ const About: React.FunctionComponent<IAboutProps> = (props:IAboutProps) => {
     const [nickname,setNickname] = useState<string>('')
     const [family_name,setFamilyName] = useState<string>('')
     const [update,setUpdate] = useState<boolean>(false)
-
     const history = useHistory()
+   
     useEffect(()=>{
         if(!props.userInf.isAuth){
-            props.auth.getProfile((profile:any)=>{
-                
+            props.auth.getProfile((profile:any)=>{       
                 const {email,nickname,name,family_name} = profile        
-                   userAuth(profile).then((res:boolean)=> res ? 
-                    getUser(email).then((res:TshowData) => 
+                userAuth(profile).then((res:boolean)=> res ?                     
+                getUser(email)
+                    .then((res:TshowData) => {
                         res.status!==404 ?
-                            showObject(res):
-                            createUser({email,nickname,name,family_name})).then(res=>{
-                                if(res === undefined){
-                                    console.log("error")
-                                }else{
-                                    showObject(res.data)
-                                }
-                            })
-                
-                
+                            props.setUser(filterUserData(res)).then(()=>{
+                                setName(res.name)
+                                setNickname(res.nickname)
+                                setFamilyName(res.family_name)
+                            }) :
+                            props.userCreate({email,nickname,name,family_name},filterUserData)                            
+                        })  
                 : history.push('/verified')) 
-                
-                
-    
             })
-        }else{
-            
-            showObject(props.userInf,true) 
-        
+        }else{           
+           setName(props.userInf.name)
+            setNickname(props.userInf.nickname)
+            setFamilyName(props.userInf.family_name)
         }
     },[])
 
-    const showObject = (obg:TshowData,idd:boolean = false)=>{
-        let userId
-        if(idd){
-            setId(obg.id)
-            userId=obg.id
-        }else{
-            setId(obg._id)
-            userId=obg._id
-        }
-    
-        setName(obg.name)
-        setNickname(obg.nickname)
-        setFamilyName(obg.family_name)
-      
-        let user = {name:obg.name,email:obg.email,nickname:obg.nickname,family_name:obg.family_name,id:userId}
-        props.setUserData(user)
-    }
 
     const saveUpdates = () => {
-        updateUser({id,name,nickname,family_name}).then((res:TresUpdateData)=>
+        console.log("Click")
+        updateUser({id:props.userInf.id,name,nickname,family_name}).then((res:TresUpdateData)=>
             res.name ? 
             props.updateUserData({name:res.name,family_name:res.family_name,nickname:res.nickname})
             :console.log('error')
@@ -124,6 +105,7 @@ const About: React.FunctionComponent<IAboutProps> = (props:IAboutProps) => {
         <div>
             <Header auth={props.auth}/>
             <AboutInfo
+                
                 update = {update}
                 family_name = {family_name}
                 name = {name}
@@ -151,7 +133,9 @@ const mapDispatchToProps = (dispatch:any) => {
         ...bindActionCreators({
            setUserData,
            updateUserData,
-           deleteUser
+           deleteUser,
+           userCreate,
+           setUser
         }, dispatch)
     }
 }

@@ -25,8 +25,8 @@ interface IChatListProps {
 
 const ChatList: React.FunctionComponent<IChatListProps> = (props:IChatListProps) => {
     const [data,setData] = useState<any>([])
-    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    //const [endpoint] = useState(`localhost:5000`)
+    //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    const [endpoint] = useState(`localhost:5000`)
     const socket = socketIOClient(endpoint);
     let history = useHistory();
 

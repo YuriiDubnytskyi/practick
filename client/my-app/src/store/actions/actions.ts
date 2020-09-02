@@ -1,4 +1,29 @@
 import * as actionTypes from './actionTypes';
+import {createUser} from "../../api/userApi"
+
+export const userCreate = (data:{
+        email:string,
+        nickname:string,
+        name:string,
+        family_name:string
+    },filterUserData:Function) => {
+    return async (dispatch:any) => {
+        await createUser(data)
+        .then((res)=>{
+            if(res === undefined){
+                console.log("error")
+            }else{
+                dispatch(setUserData(filterUserData(res.data)))
+            }
+        })  
+    };
+};
+
+export const setUser = (data:any) => {
+    return async (dispatch:any) => {
+        await dispatch(setUserData(data))
+    };
+};
 
 export const setUserData = (data:any) => {
     return {

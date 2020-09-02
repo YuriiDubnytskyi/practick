@@ -12,7 +12,7 @@ export interface IUserRedux {
     email:string,
     nickname:string,
     family_name:string,
-    isAuth:boolean
+    isAuth:boolean,
 }
 export interface IUsersRedux {
     users:{

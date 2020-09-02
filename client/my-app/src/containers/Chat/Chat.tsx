@@ -29,8 +29,8 @@ interface IChatProps {
 }
 
 const Chat: React.FunctionComponent<IChatProps> = (props:IChatProps) => {
-    const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
-    //const [endpoint] = useState<string>(`localhost:5000`)
+    //const [endpoint,setEndpoint] = useState(`https://practick.herokuapp.com/`)
+    const [endpoint] = useState<string>(`localhost:5000`)
     const [mess,setMess] = useState<string>('')
     const [chatUser,setUserChat] = useState<string|undefined>('')
     let history = useHistory();
